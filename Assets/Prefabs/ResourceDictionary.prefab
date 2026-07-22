@@ -52,3 +52,5 @@ MonoBehaviour:
     resourceArt: {fileID: 21300000, guid: 6e8e8b50bafeeb84c902744272cbfda0, type: 3}
   - resourceType: 2
     resourceArt: {fileID: 21300000, guid: 41c7d359c760da74bb457689c5614607, type: 3}
+  - resourceType: 3
+    resourceArt: {fileID: 21300000, guid: 541027e0d37db3f44b13a1eeb0db657b, type: 3}

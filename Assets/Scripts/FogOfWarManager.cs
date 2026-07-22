@@ -5,7 +5,6 @@ using System;
 
 public class FogOfWarManager : MonoBehaviour
 {
-
     [SerializeField]
     [Tooltip("The tilemap with fog of war to dynamically change")]
     private Tilemap fogOfWarTilemap;
@@ -18,6 +17,8 @@ public class FogOfWarManager : MonoBehaviour
 
     public static event Action OnLightingChanged;
 
+    public static event Action<FogOfWarLight> OnLightRemoved;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -28,6 +29,7 @@ public class FogOfWarManager : MonoBehaviour
 
         // Subscribe to trigger updates
         OnLightingChanged += OnTriggerLightingUpdate;
+        OnLightRemoved += RemoveLight;
     }
 
     // Update is called once per frame
@@ -39,6 +41,17 @@ public class FogOfWarManager : MonoBehaviour
     public static void TriggerLightingUpdate()
     {
         OnLightingChanged?.Invoke();
+    }
+
+    public static void TriggerRemoveLightUpdate(FogOfWarLight light)
+    {
+        OnLightRemoved?.Invoke(light);
+    }
+
+    public void RemoveLight(FogOfWarLight light)
+    {
+        lightSources.Remove(light);
+        UpdateLightingRemoveLight(light);
     }
 
     private void OnTriggerLightingUpdate()
@@ -63,7 +76,7 @@ public class FogOfWarManager : MonoBehaviour
         }
         else
         {
-            lightPosition = Vector3Int.CeilToInt(light.transform.position);
+            lightPosition = GridManager.singleton.resourceTilemap.WorldToCell(light.transform.position);
         }
 
         // Calculate partial light tiles
@@ -77,19 +90,31 @@ public class FogOfWarManager : MonoBehaviour
     private void UpdateFullLights(FogOfWarLight light)
     {
         Vector3Int lightPosition;
+        // Special case for player movement, since the player could be mid lerp
         if(light.GetComponent<PlayerMovement>())
         {
             lightPosition = light.GetComponent<PlayerMovement>().currentGridLocation;
         }
         else
         {
-            lightPosition = Vector3Int.CeilToInt(light.transform.position);
+            lightPosition = GridManager.singleton.resourceTilemap.WorldToCell(light.transform.position);
         }
 
         // Calculate full light tiles
         foreach(Vector3Int position in GetTilePositionsInRadius(lightPosition, light.lightRadius)) {
             fogOfWarTilemap.SetTile(position, null);
         }
+    }
+
+    // Remove a light's previous lighting and replace it with fog of war, then trigger a lighting update
+    private void UpdateLightingRemoveLight(FogOfWarLight light)
+    {
+        Vector3Int lightPosition = GridManager.singleton.resourceTilemap.WorldToCell(light.transform.position);
+        foreach(Vector3Int position in GetTilePositionsInRadius(lightPosition, light.lightRadius)) {
+            fogOfWarTilemap.SetTile(position, partialFogTile);
+        }
+
+        OnTriggerLightingUpdate();
     }
     
 
@@ -109,11 +134,7 @@ public class FogOfWarManager : MonoBehaviour
                 {
                     Vector3Int targetCell = new Vector3Int(originCell.x + x, originCell.y + y, originCell.z);
                     
-                    // Keep it if a tile actively exists at this position
-                    if (fogOfWarTilemap.HasTile(targetCell))
-                    {
-                        positions.Add(targetCell);
-                    }
+                    positions.Add(targetCell);
                 }
             }
         }
