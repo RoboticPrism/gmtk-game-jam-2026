@@ -273,6 +273,26 @@ PrefabInstance:
       propertyPath: m_Name
       value: Grid
       objectReference: {fileID: 0}
+    - target: {fileID: 794822401453136470, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4124159111986706162, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_TileMatrixArray.Array.data[0].m_RefCount
+      value: 42106
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669934361137727007, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_TileObjectToInstantiateArray.Array.data[0].m_Data
+      value: 
+      objectReference: {fileID: 5470740787169605463, guid: a1f690027a26ada4b9a4dfaee787adbc, type: 3}
+    - target: {fileID: 5669934361137727007, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_TileObjectToInstantiateArray.Array.data[0].m_RefCount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5669934361137727007, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_Tiles.Array.data[15].second.m_TileObjectToInstantiateIndex
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
