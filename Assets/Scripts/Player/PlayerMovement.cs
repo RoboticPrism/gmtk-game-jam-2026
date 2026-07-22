@@ -1,9 +1,7 @@
 using System.Collections;
 using UnityEngine;
-using UnityEngine.InputSystem;
-using UnityEngine.Tilemaps;
 
-public class Player : MonoBehaviour
+public class PlayerMovement : MonoBehaviour
 {
     private InputSystem_Actions controls;
     [SerializeField]
@@ -29,10 +27,6 @@ public class Player : MonoBehaviour
     private bool isMoveOnCooldown = false;
 
     [SerializeField]
-    [Tooltip("The tilemap we need to collision check against")]
-    private Tilemap colisionTilemap;
-
-    [SerializeField]
     [Tooltip("The player's current grid location to move to")]
     public Vector3Int currentGridLocation;
 
@@ -47,6 +41,8 @@ public class Player : MonoBehaviour
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
 
         controls.Enable();
+
+        visualTargetLocation = currentGridLocation;
     }
 
     // Update is called once per frame
@@ -124,17 +120,17 @@ public class Player : MonoBehaviour
 
     private bool CheckCollisionAtLocation(Vector3Int location)
     {
-        return colisionTilemap.GetTile(location) != null;
+        return GridManager.singleton.resourceTilemap.GetTile(location) != null;
     }
 
     private bool CheckBumpableAtLocation(Vector3Int location)
     {
-        return colisionTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>() != null;
+        return GridManager.singleton.resourceTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>() != null;
     }
 
     private void BumpBumpableAtLocation(Vector3Int location)
     {
-        colisionTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>().OnBump();
+        GridManager.singleton.resourceTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>().OnBump();
         DoBumpCooldown(location);
     }
 
