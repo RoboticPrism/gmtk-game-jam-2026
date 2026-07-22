@@ -1,21 +1,40 @@
 using UnityEngine;
+using UnityEngine.Tilemaps;
 
 public class BumpableResource : BumpableTile
 {
-    // Start is called once before the first execution of Update after the MonoBehaviour is created
-    void Start()
-    {
-        
-    }
+    [SerializeField]
+    [Tooltip("How many hits this takes to break")]
+    public int health;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+    [SerializeField]
+    [Tooltip("What type of resource does this drop")]
+    public ResourceType resourceType;
+
+    [SerializeField]
+    [Tooltip("Whats the minimum drop ammount")]
+    public int dropMin;
+
+    [SerializeField]
+    [Tooltip("Whats the maxmimum drop ammount")]
+    public int dropMax;
 
     public override void OnBump()
     {
-        Debug.Log("Bumped");
+        if(health > 0)
+        {
+            health -= 1;
+        }
+        else
+        {
+            // Drop resources
+            for (int i = 0; i < Random.Range(dropMin, dropMax); i++)
+            {
+                ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0), Quaternion.identity);
+                drop.SetResourceType(resourceType);
+            }
+            // Delete this tile
+            GridManager.singleton.resourceTilemap.SetTile(GridManager.singleton.resourceTilemap.WorldToCell(transform.position), null);
+        }
     }
 }

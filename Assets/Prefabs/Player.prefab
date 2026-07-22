@@ -238,7 +238,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 5377359474997948771}
+  - component: {fileID: 3482307385310373614}
   - component: {fileID: 8697113804776377361}
+  - component: {fileID: 5899290522328965826}
   - component: {fileID: 5981694376199197245}
   m_Layer: 0
   m_Name: Player
@@ -264,6 +266,21 @@ Transform:
   - {fileID: 6083961867973228039}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &3482307385310373614
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593639799635864630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8a6029a67c6841c498bed56d2585da80, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Player
+  singleton: {fileID: 0}
+  playerMovement: {fileID: 8697113804776377361}
+  playerInventory: {fileID: 5899290522328965826}
 --- !u!114 &8697113804776377361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -282,8 +299,20 @@ MonoBehaviour:
   moveCooldownSeconds: 0.2
   bumpCooldownSeconds: 0.5
   isMoveOnCooldown: 0
-  colisionTilemap: {fileID: 0}
   currentGridLocation: {x: 2, y: 0, z: 0}
+--- !u!114 &5899290522328965826
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593639799635864630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 33167f61d102d924198e79c8734dc0ed, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
+  resourceInventorySlots: []
 --- !u!114 &5981694376199197245
 MonoBehaviour:
   m_ObjectHideFlags: 0

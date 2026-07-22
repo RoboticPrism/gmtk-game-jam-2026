@@ -57,9 +57,9 @@ public class FogOfWarManager : MonoBehaviour
     private void UpdatePartialLights(FogOfWarLight light)
     {
         Vector3Int lightPosition;
-        if(light.GetComponent<Player>())
+        if(light.GetComponent<PlayerMovement>())
         {
-            lightPosition = light.GetComponent<Player>().currentGridLocation;
+            lightPosition = light.GetComponent<PlayerMovement>().currentGridLocation;
         }
         else
         {
@@ -77,9 +77,9 @@ public class FogOfWarManager : MonoBehaviour
     private void UpdateFullLights(FogOfWarLight light)
     {
         Vector3Int lightPosition;
-        if(light.GetComponent<Player>())
+        if(light.GetComponent<PlayerMovement>())
         {
-            lightPosition = light.GetComponent<Player>().currentGridLocation;
+            lightPosition = light.GetComponent<PlayerMovement>().currentGridLocation;
         }
         else
         {
