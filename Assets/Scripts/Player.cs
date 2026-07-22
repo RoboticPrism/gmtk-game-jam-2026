@@ -25,11 +25,11 @@ public class Player : MonoBehaviour
 
     [SerializeField]
     [Tooltip("The tilemap we need to collision check against")]
-    private Tilemap tilemap;
+    private Tilemap colisionTilemap;
 
     [SerializeField]
     [Tooltip("The player's current grid location to move to")]
-    private Vector3Int currentGridLocation;
+    public Vector3Int currentGridLocation;
     
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -62,7 +62,7 @@ public class Player : MonoBehaviour
             {
                 if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.right))
                 {
-                    currentGridLocation += Vector3Int.right;
+                    UpdatePosition(currentGridLocation + Vector3Int.right);
                     DoMoveCooldown();
                 }
             }
@@ -71,7 +71,7 @@ public class Player : MonoBehaviour
             {
                 if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.left))
                 {
-                    currentGridLocation += Vector3Int.left;
+                    UpdatePosition(currentGridLocation + Vector3Int.left);
                     DoMoveCooldown();
                 }
             }
@@ -80,7 +80,7 @@ public class Player : MonoBehaviour
             {
                 if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.up))
                 {
-                    currentGridLocation += Vector3Int.up;
+                    UpdatePosition(currentGridLocation + Vector3Int.up);
                     DoMoveCooldown();
                 }
             }
@@ -89,16 +89,22 @@ public class Player : MonoBehaviour
             {
                 if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.down))
                 {
-                    currentGridLocation += Vector3Int.down;
+                    UpdatePosition(currentGridLocation + Vector3Int.down);
                     DoMoveCooldown();
                 }
             }
         }
     }
 
+    private void UpdatePosition(Vector3Int targetPosition)
+    {
+        currentGridLocation = targetPosition;
+        FogOfWarManager.TriggerLightingUpdate();
+    }
+
     private bool CheckCollisionAtLocation(Vector3Int location)
     {
-        return tilemap.GetTile(location) != null;
+        return colisionTilemap.GetTile(location) != null;
     }
 
     private Coroutine moveCoroutine;
