@@ -21,6 +21,11 @@ public class Player : MonoBehaviour
     [Tooltip("The cooldown in seconds between moving.")]
     private float moveCooldownSeconds;
 
+    [SerializeField]
+    [Tooltip("The cooldown in seconds between bumping.")]
+    private float bumpCooldownSeconds;
+
+    [SerializeField]
     private bool isMoveOnCooldown = false;
 
     [SerializeField]
@@ -30,7 +35,9 @@ public class Player : MonoBehaviour
     [SerializeField]
     [Tooltip("The player's current grid location to move to")]
     public Vector3Int currentGridLocation;
-    
+
+    private Vector3 visualTargetLocation;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -46,7 +53,7 @@ public class Player : MonoBehaviour
     void Update()
     {
         // Move towards target location
-        transform.position = Vector3.Lerp(transform.position, currentGridLocation, moveSpeed);
+        transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed);
 
         // Check Inputs
         CheckMove();
@@ -57,41 +64,41 @@ public class Player : MonoBehaviour
     {
         if(!isMoveOnCooldown)
         {
+            Vector3Int targetLocation;
+
             // If moving right
-            if(moveInput.x > deadzone && moveInput.x > moveInput.y)
+            if (moveInput.x > deadzone && moveInput.x > moveInput.y)
             {
-                if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.right))
-                {
-                    UpdatePosition(currentGridLocation + Vector3Int.right);
-                    DoMoveCooldown();
-                }
+                targetLocation = currentGridLocation + Vector3Int.right;
             }
-            // if moving left
-            if(moveInput.x < -deadzone && moveInput.x < moveInput.y)
+            // If moving left
+            else if(moveInput.x < -deadzone && moveInput.x < moveInput.y)
             {
-                if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.left))
-                {
-                    UpdatePosition(currentGridLocation + Vector3Int.left);
-                    DoMoveCooldown();
-                }
+                targetLocation = currentGridLocation + Vector3Int.left;
             }
             // If moving up
-            if(moveInput.y > deadzone && moveInput.y > moveInput.x)
+            else if(moveInput.y > deadzone && moveInput.y > moveInput.x)
             {
-                if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.up))
-                {
-                    UpdatePosition(currentGridLocation + Vector3Int.up);
-                    DoMoveCooldown();
-                }
+                targetLocation = currentGridLocation + Vector3Int.up;
             }
             // If moving down
-            if(moveInput.y < -deadzone && moveInput.y < moveInput.x)
+            else if(moveInput.y < -deadzone && moveInput.y < moveInput.x)
             {
-                if (!CheckCollisionAtLocation(currentGridLocation + Vector3Int.down))
-                {
-                    UpdatePosition(currentGridLocation + Vector3Int.down);
-                    DoMoveCooldown();
-                }
+                targetLocation = currentGridLocation + Vector3Int.down;
+            }
+            else
+            {
+                return;
+            }
+
+            if(!CheckCollisionAtLocation(targetLocation))
+            {
+                UpdatePosition(targetLocation);
+                DoMoveCooldown();
+            }
+            else if (CheckBumpableAtLocation(targetLocation))
+            {
+                BumpBumpableAtLocation(targetLocation);
             }
         }
     }
@@ -99,12 +106,8 @@ public class Player : MonoBehaviour
     private void UpdatePosition(Vector3Int targetPosition)
     {
         currentGridLocation = targetPosition;
+        visualTargetLocation = targetPosition;
         FogOfWarManager.TriggerLightingUpdate();
-    }
-
-    private bool CheckCollisionAtLocation(Vector3Int location)
-    {
-        return colisionTilemap.GetTile(location) != null;
     }
 
     private Coroutine moveCoroutine;
@@ -116,6 +119,38 @@ public class Player : MonoBehaviour
     IEnumerator MoveCooldown()
     {
         yield return new WaitForSeconds(moveCooldownSeconds);
+        isMoveOnCooldown = false;
+    }
+
+    private bool CheckCollisionAtLocation(Vector3Int location)
+    {
+        return colisionTilemap.GetTile(location) != null;
+    }
+
+    private bool CheckBumpableAtLocation(Vector3Int location)
+    {
+        return colisionTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>() != null;
+    }
+
+    private void BumpBumpableAtLocation(Vector3Int location)
+    {
+        colisionTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>().OnBump();
+        DoBumpCooldown(location);
+    }
+
+    private Coroutine bumpCoroutine;
+    private void DoBumpCooldown(Vector3Int location)
+    {
+        isMoveOnCooldown = true;
+        bumpCoroutine = StartCoroutine(Bump(location));
+    }
+
+    IEnumerator Bump(Vector3Int location)
+    {
+        visualTargetLocation = Vector3.Lerp(location, currentGridLocation, 0.5f);
+        yield return new WaitForSeconds(bumpCooldownSeconds/2f);
+        visualTargetLocation = currentGridLocation;
+        yield return new WaitForSeconds(bumpCooldownSeconds/2f);
         isMoveOnCooldown = false;
     }
 }
