@@ -17,7 +17,7 @@ public class GridManager : MonoBehaviour
     [Tooltip("The tilemap the background is on")]
     public Tilemap worldTilemap;
 
-    void Awake()
+    public void Awake()
     {
         if(singleton)
         {
