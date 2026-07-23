@@ -81,4 +81,14 @@ public class PlayerAnimator : MonoBehaviour
         yield return new WaitForSeconds(returnToIdleSeconds);
         moveDirection = MoveDirection.IDLE;
     } 
+
+    public void HidePlayer()
+    {
+        spriteRenderer.gameObject.SetActive(false);
+    }
+
+    public void ShowPlayer()
+    {
+        spriteRenderer.gameObject.SetActive(true);
+    }
 }

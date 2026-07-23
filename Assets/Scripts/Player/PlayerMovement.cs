@@ -40,6 +40,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField]
     private float currentTeleportChannel = 0;
 
+    [SerializeField]
     private bool isHoldingTeleport = false;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
@@ -49,7 +50,7 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
-        controls.Player.Jump.performed += ctx => isHoldingTeleport = true;
+        controls.Player.Jump.started += ctx => isHoldingTeleport = true;
         controls.Player.Jump.canceled += ctx => isHoldingTeleport = false;
 
         controls.Enable();
@@ -134,12 +135,12 @@ public class PlayerMovement : MonoBehaviour
         }
         else
         {
-            if (teleportSeconds > 0)
+            if (currentTeleportChannel > 0)
             {
-                teleportSeconds -= Time.deltaTime;
-                if(teleportSeconds < 0)
+                currentTeleportChannel -= Time.deltaTime;
+                if(currentTeleportChannel < 0)
                 {
-                    teleportSeconds = 0;
+                    currentTeleportChannel = 0;
                 }
             }
         }
@@ -147,7 +148,27 @@ public class PlayerMovement : MonoBehaviour
 
     IEnumerator TeleportAnimation()
     {
-        yield return null;
+        controls.Disable();
+
+        ScreenEffectManager.singleton.FadeOut();
+
+        Player.singleton.playerAnimator.HidePlayer();
+
+        yield return new WaitForSeconds(2f);
+
+        // Teleport to below the pyre
+        currentGridLocation = GridManager.singleton.resourceTilemap.WorldToCell(FindAnyObjectByType<Pyre>().transform.position + Vector3Int.down);
+        visualTargetLocation = currentGridLocation;
+
+        yield return new WaitForSeconds(1f);
+
+        ScreenEffectManager.singleton.FadeIn();
+
+        yield return new WaitForSeconds(2f);
+
+        Player.singleton.playerAnimator.ShowPlayer();
+
+        controls.Enable();
     }
 
     private void UpdatePosition(Vector3Int targetPosition)
