@@ -9,9 +9,9 @@ public abstract class BumpableTile : MonoBehaviour
     [SerializeField]
     private AudioClip bumpClip;
 
-    private AudioSource audioSource;
+    protected AudioSource audioSource;
 
-    public void Start()
+    public virtual void Start()
     {
         audioSource = GetComponent<AudioSource>();    
     }
