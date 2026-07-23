@@ -33,6 +33,15 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 visualTargetLocation;
 
+    [SerializeField]
+    [Tooltip("How long teleport has to be held to teleport")]
+    private float teleportSeconds;
+
+    [SerializeField]
+    private float currentTeleportChannel = 0;
+
+    private bool isHoldingTeleport = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +49,8 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        controls.Player.Jump.performed += ctx => isHoldingTeleport = true;
+        controls.Player.Jump.canceled += ctx => isHoldingTeleport = false;
 
         controls.Enable();
 
@@ -54,6 +65,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Check Inputs
         CheckMove();
+        CheckTeleport();
     }
 
 
@@ -106,6 +118,36 @@ public class PlayerMovement : MonoBehaviour
                 EnemyManager.singleton.DoEnemyTurns();
             }
         }
+    }
+
+    private void CheckTeleport()
+    {
+        if(isHoldingTeleport)
+        {
+            currentTeleportChannel += Time.deltaTime;
+            if(currentTeleportChannel > teleportSeconds)
+            {
+                StartCoroutine(TeleportAnimation());
+                currentTeleportChannel = 0;
+                isHoldingTeleport = false;
+            }
+        }
+        else
+        {
+            if (teleportSeconds > 0)
+            {
+                teleportSeconds -= Time.deltaTime;
+                if(teleportSeconds < 0)
+                {
+                    teleportSeconds = 0;
+                }
+            }
+        }
+    }
+
+    IEnumerator TeleportAnimation()
+    {
+        yield return null;
     }
 
     private void UpdatePosition(Vector3Int targetPosition)

@@ -1364,6 +1364,10 @@ PrefabInstance:
       propertyPath: colisionTilemap
       value: 
       objectReference: {fileID: 2044496086}
+    - target: {fileID: 8697113804776377361, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: currentTeleportChannel
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
