@@ -6,6 +6,7 @@ public class Player : MonoBehaviour
 
     public PlayerMovement playerMovement;
     public PlayerInventory playerInventory;
+    public PlayerAnimator playerAnimator;
 
     public void Awake()
     {
