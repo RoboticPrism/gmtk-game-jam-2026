@@ -58,11 +58,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7639706657907935717, guid: d319fccdcd39f354db77bc8eff920f21, type: 3}
       propertyPath: dropMax
-      value: 2
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7639706657907935717, guid: d319fccdcd39f354db77bc8eff920f21, type: 3}
       propertyPath: dropMin
-      value: 1
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

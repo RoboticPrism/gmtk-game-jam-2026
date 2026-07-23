@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class ResourceDrop : MonoBehaviour
+public class ResourceSpend : MonoBehaviour
 {
     [SerializeField]
     [Tooltip("What type of resource is this")]
@@ -11,11 +11,11 @@ public class ResourceDrop : MonoBehaviour
     public SpriteRenderer spriteRenderer;
 
     [SerializeField]
-    [Tooltip("How long does this move towards the player")]
+    [Tooltip("How long does this move towards the target")]
     private float moveDuration;
 
     [SerializeField]
-    [Tooltip("How long does this sit on the ground before magnetizing to the player")]
+    [Tooltip("How long does this sit on the ground before magnetizing to the target")]
     private float collectionDelaySeconds;
 
     [SerializeField]
@@ -28,15 +28,19 @@ public class ResourceDrop : MonoBehaviour
 
     private Vector3 flingTarget;
 
+    [SerializeField]
+    private Transform finalTarget;
+
     public void Start()
     {
         flingTarget = transform.position + new Vector3(Random.Range(-flingRange, flingRange), Random.Range(-flingRange, flingRange), 0);
     }
 
-    public void SetResourceType(ResourceType type)
+    public void SetResourceTypeAndTarget(ResourceType type, Transform target)
     {
         resourceType = type;
         spriteRenderer.sprite = ResourceDictionary.singleton.GetResourceDataByType(type).resourceArt;
+        finalTarget = target;
         StartCoroutine(ResourceCollect());
     }
 
@@ -54,20 +58,16 @@ public class ResourceDrop : MonoBehaviour
         // wait for a bit
         yield return new WaitForSeconds(collectionDelaySeconds);
 
-        // magnetize to the player
+        // magnetize to the target
         elapsedTime = 0f;
-        while(Vector3.Distance(Player.singleton.transform.position, transform.position) > collectionRange)
+        while(Vector3.Distance(finalTarget.position, transform.position) > collectionRange)
         {
-            transform.position = Vector3.Lerp(transform.position, Player.singleton.transform.position, elapsedTime / moveDuration);
+            transform.position = Vector3.Lerp(transform.position, finalTarget.position, elapsedTime / moveDuration);
             elapsedTime += Time.deltaTime;
             yield return null;
         }
-
-        // add it to inventory
-        Player.singleton.playerInventory.AddItemToInventory(resourceType);
 
         // destroy this
         Destroy(gameObject);
     }
 }
-

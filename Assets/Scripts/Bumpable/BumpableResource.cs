@@ -30,7 +30,7 @@ public class BumpableResource : BumpableTile
             // Drop resources
             for (int i = 0; i < Random.Range(dropMin, dropMax); i++)
             {
-                ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, new Vector3(transform.position.x + Random.Range(-1f, 1f), transform.position.y + Random.Range(-1f, 1f), 0), Quaternion.identity);
+                ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, transform.position, Quaternion.identity);
                 drop.SetResourceType(resourceType);
             }
             // Delete this tile

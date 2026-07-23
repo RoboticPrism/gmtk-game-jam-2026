@@ -114,9 +114,13 @@ public class FogOfWarManager : MonoBehaviour
     // Remove a light's previous lighting and replace it with fog of war, then trigger a lighting update
     private void UpdateLightingRemoveLight(FogOfWarLight light)
     {
-        Vector3Int lightPosition = GridManager.singleton.resourceTilemap.WorldToCell(light.transform.position);
-        foreach(Vector3Int position in GetTilePositionsInRadius(lightPosition, light.lightRadius)) {
-            GridManager.singleton.fogOfWarTilemap.SetTile(position, partialFogTile);
+        if (GridManager.singleton)
+        {
+            Vector3Int lightPosition = GridManager.singleton.resourceTilemap.WorldToCell(light.transform.position);
+
+            foreach(Vector3Int position in GetTilePositionsInRadius(lightPosition, light.lightRadius)) {
+                GridManager.singleton.fogOfWarTilemap.SetTile(position, partialFogTile);
+            }
         }
 
         UpdateLights();
