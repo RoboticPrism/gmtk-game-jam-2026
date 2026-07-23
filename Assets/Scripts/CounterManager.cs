@@ -5,8 +5,12 @@ public class CounterManager : MonoBehaviour
     public static CounterManager singleton;
 
     [SerializeField]
-    [Tooltip("How many steps the player starts with")]
+    [Tooltip("How many steps the player has")]
     public int steps;
+
+    [SerializeField]
+    [Tooltip("How many steps the player starts with")]
+    public int startingSteps;
 
     public void Awake()
     {
@@ -18,6 +22,11 @@ public class CounterManager : MonoBehaviour
         {
             singleton = this;
         }
+    }
+
+    public void StartCounting()
+    {
+        steps = startingSteps;
     }
 
     public void UseStep()
