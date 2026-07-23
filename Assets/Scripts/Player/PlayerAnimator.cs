@@ -85,6 +85,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SetMoveDirection(MoveDirection moveDirection)
     {
         this.moveDirection = moveDirection;
+        audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(stepClip);
 
         // Restart the idle cooldown
