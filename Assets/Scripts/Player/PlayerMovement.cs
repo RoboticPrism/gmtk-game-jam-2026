@@ -62,30 +62,31 @@ public class PlayerMovement : MonoBehaviour
         if(!isMoveOnCooldown)
         {
             Vector3Int targetLocation;
+            MoveDirection moveDirection;
 
             // If moving right
             if (moveInput.x > deadzone && moveInput.x > moveInput.y)
             {
                 targetLocation = currentGridLocation + Vector3Int.right;
-                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.RIGHT);
+                moveDirection = MoveDirection.RIGHT;
             }
             // If moving left
             else if(moveInput.x < -deadzone && moveInput.x < moveInput.y)
             {
                 targetLocation = currentGridLocation + Vector3Int.left;
-                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.LEFT);
+                moveDirection = MoveDirection.LEFT;
             }
             // If moving up
             else if(moveInput.y > deadzone && moveInput.y > moveInput.x)
             {
                 targetLocation = currentGridLocation + Vector3Int.up;
-                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.UP);
+                moveDirection = MoveDirection.UP;
             }
             // If moving down
             else if(moveInput.y < -deadzone && moveInput.y < moveInput.x)
             {
                 targetLocation = currentGridLocation + Vector3Int.down;
-                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.DOWN);
+                moveDirection = MoveDirection.DOWN;
             }
             else
             {
@@ -97,6 +98,7 @@ public class PlayerMovement : MonoBehaviour
                 UpdatePosition(targetLocation);
                 DoMoveCooldown();
                 EnemyManager.singleton.DoEnemyTurns();
+                Player.singleton.playerAnimator.SetMoveDirection(moveDirection);
             }
             else if (GridManager.singleton.GetBumpableAtGridPoint(targetLocation) != null)
             {
