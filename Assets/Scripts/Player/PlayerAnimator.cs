@@ -27,6 +27,16 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     public MoveDirection moveDirection;
 
+    [SerializeField]
+    private AudioClip stepClip;
+
+    private AudioSource audioSource;
+
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -55,6 +65,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SetMoveDirection(MoveDirection moveDirection)
     {
         this.moveDirection = moveDirection;
+        audioSource.PlayOneShot(stepClip);
 
         // Restart the idle cooldown
         if (idleCooldown != null)
