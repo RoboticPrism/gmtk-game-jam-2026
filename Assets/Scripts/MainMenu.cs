@@ -9,6 +9,7 @@ public class MainMenu : MonoBehaviour
     void Start()
     {
         startbutton.onClick.AddListener(StartGame);
+        Bootstrap.Instance.Audio.PlayMusic();
     }
 
     private void OnDestroy() {
@@ -17,7 +18,8 @@ public class MainMenu : MonoBehaviour
 
     private void StartGame() {
         Debug.Log("Start Game");
+        Bootstrap.Instance.Audio.PlayButtonSFX();
+        Bootstrap.Instance.Audio.StopMusic();
         SceneManager.LoadScene("OutdoorsScene");
-        SceneManager.SetActiveScene(SceneManager.GetSceneByName("OutdoorsScene"));
     }
 }
