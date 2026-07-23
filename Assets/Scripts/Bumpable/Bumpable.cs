@@ -1,7 +1,12 @@
 using UnityEngine;
-using UnityEngine.Tilemaps;
+using System;
 
 public abstract class BumpableTile : MonoBehaviour
 {
-    public abstract void OnBump();
+
+    public event Action OnInteract;
+
+    public virtual void OnBump() {
+        OnInteract?.Invoke();
+    }
 }

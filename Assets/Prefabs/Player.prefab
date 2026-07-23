@@ -351,4 +351,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f4bbaf6e60f5c484d8eab3dbf6c09a49, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarLight
-  lightRadius: 3
+  lightRadius: 5
