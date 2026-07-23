@@ -632,6 +632,14 @@ MonoBehaviour:
   bumpClip: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
   refuelCost: 20
   refuelSteps: 50
+  counterText: {fileID: 5022982068444560569}
+  title: {fileID: 8745149704532665658}
+  titleHoldSeconds: 5
+  fadeInSeconds: 1
+  holdSeconds: 20
+  fadeOutSeconds: 5
+  subtext1: {fileID: 7100661743464777580}
+  subtext2: {fileID: 1753275415124919326}
 --- !u!82 &5826190248910872353
 AudioSource:
   m_ObjectHideFlags: 0
