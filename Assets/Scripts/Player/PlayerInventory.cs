@@ -16,6 +16,11 @@ public class PlayerInventory : MonoBehaviour
     [Tooltip("How long between each resource visually being extracted in seconds")]
     private float resourceSpendDelaySeconds;
 
+    [SerializeField]
+    private AudioClip pickupClip;
+
+    private AudioSource audioSource;
+
     [System.Serializable]
     public class ResourceInventorySlot
     {
@@ -29,6 +34,11 @@ public class PlayerInventory : MonoBehaviour
         }
     }
 
+    public void Start()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void AddItemToInventory(ResourceType resourceType, int amount = 1)
     {
         ResourceInventorySlot preexistingSlot = resourceInventorySlots.FirstOrDefault(slot => slot.resourceType == resourceType);
@@ -40,6 +50,7 @@ public class PlayerInventory : MonoBehaviour
         {
             resourceInventorySlots.Add(new ResourceInventorySlot(resourceType, amount));
         }
+        audioSource.PlayOneShot(pickupClip);
     }
 
     public void RemoveItemFromInventory(ResourceType resourceType, int amount = 1)
