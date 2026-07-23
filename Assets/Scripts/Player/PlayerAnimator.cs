@@ -21,6 +21,20 @@ public class PlayerAnimator : MonoBehaviour
     private SpriteRenderer spriteRenderer;
 
     [SerializeField]
+    private SpriteRenderer teleportRenderer;
+
+    [SerializeField]
+    private float teleportAuraRadio;
+
+    private bool teleportAnimating = false;
+
+    [SerializeField]
+    private int teleportSpriteLayer;
+
+    [SerializeField]
+    private int teleportSpriteAnimationLayer;
+
+    [SerializeField]
     [Tooltip("How long after movement to return to idle")]
     private float returnToIdleSeconds;
 
@@ -35,6 +49,7 @@ public class PlayerAnimator : MonoBehaviour
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
+        teleportRenderer.sortingOrder = teleportSpriteLayer;
     }
 
     // Update is called once per frame
@@ -59,7 +74,12 @@ public class PlayerAnimator : MonoBehaviour
                 spriteRenderer.sprite = left;
                 spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
                 break;
-        } 
+        }
+
+        if (!teleportAnimating)
+        {
+            SetTeleportSize();
+        }
     }
 
     public void SetMoveDirection(MoveDirection moveDirection)
@@ -81,4 +101,50 @@ public class PlayerAnimator : MonoBehaviour
         yield return new WaitForSeconds(returnToIdleSeconds);
         moveDirection = MoveDirection.IDLE;
     } 
+
+    public void HidePlayer()
+    {
+        spriteRenderer.gameObject.SetActive(false);
+    }
+
+    public void ShowPlayer()
+    {
+        spriteRenderer.gameObject.SetActive(true);
+    }
+
+    public void SetTeleportSize()
+    {
+        teleportRenderer.transform.localScale = Player.singleton.playerMovement.currentTeleportChannel * teleportAuraRadio * Vector3.one;
+    }
+
+    public void AnimateTeleport()
+    {
+        StartCoroutine(TeleportAnimation());
+    }
+
+    IEnumerator TeleportAnimation() 
+    {
+        teleportAnimating = true;
+        teleportRenderer.sortingOrder = teleportSpriteAnimationLayer;
+
+        float currentTime = 0f;
+        while (currentTime < 2f)
+        {
+            currentTime += Time.deltaTime;
+            teleportRenderer.transform.localScale = Mathf.Lerp(0f, 2f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            yield return null;
+        }
+
+        teleportRenderer.sortingOrder = teleportSpriteLayer;
+        ShowPlayer();
+        
+        currentTime = 0f;
+        while (currentTime < 2f)
+        {
+            currentTime += Time.deltaTime;
+            teleportRenderer.transform.localScale = Mathf.Lerp(2f, 0f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            yield return null;
+        }
+        teleportAnimating = false;
+    }
 }
