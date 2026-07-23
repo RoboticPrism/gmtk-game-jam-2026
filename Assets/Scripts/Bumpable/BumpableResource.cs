@@ -19,6 +19,9 @@ public class BumpableResource : BumpableTile
     [Tooltip("Whats the maxmimum drop ammount")]
     public int dropMax;
 
+    [SerializeField]
+    private DestroyEffect destroyEffectPrefab;
+
     public override void OnBump()
     {
         base.OnBump();
@@ -34,6 +37,10 @@ public class BumpableResource : BumpableTile
                 ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, transform.position, Quaternion.identity);
                 drop.SetResourceType(resourceType);
             }
+
+            // Create destroy effect
+            Instantiate(destroyEffectPrefab, transform.position, Quaternion.identity);
+
             // Delete this tile
             GridManager.singleton.resourceTilemap.SetTile(GridManager.singleton.resourceTilemap.WorldToCell(transform.position), null);
         }

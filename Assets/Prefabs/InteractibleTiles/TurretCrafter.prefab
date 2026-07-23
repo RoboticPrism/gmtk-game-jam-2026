@@ -44,6 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9f94a735cf338d94fbd3f8a58eac6d89, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::BumpableCrafter
+  bumpClip: {fileID: 8300000, guid: 9949695a721cae046ac8bcd8265ebada, type: 3}
   craftCosts:
   - resourceType: 0
     amount: 10
