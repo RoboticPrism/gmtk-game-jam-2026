@@ -92,14 +92,16 @@ public class PlayerMovement : MonoBehaviour
                 return;
             }
 
-            if(!CheckCollisionAtLocation(targetLocation))
+            if(!GridManager.singleton.CheckCollisionAtGridPoint(targetLocation))
             {
                 UpdatePosition(targetLocation);
                 DoMoveCooldown();
+                EnemyManager.singleton.DoEnemyTurns();
             }
-            else if (CheckBumpableAtLocation(targetLocation))
+            else if (GridManager.singleton.GetBumpableAtGridPoint(targetLocation) != null)
             {
                 BumpBumpableAtLocation(targetLocation);
+                EnemyManager.singleton.DoEnemyTurns();
             }
         }
     }
@@ -124,19 +126,9 @@ public class PlayerMovement : MonoBehaviour
         isMoveOnCooldown = false;
     }
 
-    private bool CheckCollisionAtLocation(Vector3Int location)
-    {
-        return GridManager.singleton.resourceTilemap.GetTile(location) != null;
-    }
-
-    private bool CheckBumpableAtLocation(Vector3Int location)
-    {
-        return GridManager.singleton.resourceTilemap.GetInstantiatedObject(location)?.GetComponent<BumpableTile>() != null;
-    }
-
     private void BumpBumpableAtLocation(Vector3Int location)
     {
-        GridManager.singleton.resourceTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>().OnBump();
+        GridManager.singleton.GetBumpableAtGridPoint(location).OnBump();
         DoBumpCooldown(location);
         CounterManager.singleton.UseStep();
     }
