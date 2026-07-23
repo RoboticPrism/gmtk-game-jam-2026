@@ -38,7 +38,7 @@ public class PlayerMovement : MonoBehaviour
     private float teleportSeconds;
 
     [SerializeField]
-    private float currentTeleportChannel = 0;
+    public float currentTeleportChannel = 0;
 
     [SerializeField]
     private bool isHoldingTeleport = false;
@@ -129,7 +129,7 @@ public class PlayerMovement : MonoBehaviour
             if(currentTeleportChannel > teleportSeconds)
             {
                 StartCoroutine(TeleportAnimation());
-                currentTeleportChannel = 0;
+                currentTeleportChannel = teleportSeconds-0.01f;
                 isHoldingTeleport = false;
             }
         }
@@ -164,9 +164,9 @@ public class PlayerMovement : MonoBehaviour
 
         ScreenEffectManager.singleton.FadeIn();
 
-        yield return new WaitForSeconds(2f);
+        Player.singleton.playerAnimator.AnimateTeleport();
 
-        Player.singleton.playerAnimator.ShowPlayer();
+        yield return new WaitForSeconds(2f);
 
         controls.Enable();
     }
