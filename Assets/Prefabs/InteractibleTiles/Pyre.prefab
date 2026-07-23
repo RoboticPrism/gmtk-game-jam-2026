@@ -372,21 +372,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 3407206989913209586}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9840f87219df84505803024c796e739d, type: 3}
+  m_Script: {fileID: 11500000, guid: 2ed57967c52645d390a89dcf8f61ba73, type: 3}
   m_Name: 
   m_EditorClassIdentifier: EasyTextEffects::EasyTextEffects.TextEffect
-  text: {fileID: 8745149704532665658}
-  usePreset: 0
-  preset: {fileID: 0}
-  tagEffects: []
-  globalEffects:
-  - triggerWhen: 0
-    effect: {fileID: 11400000, guid: 78d58214a116ba04bbd7993dd73991ca, type: 2}
-    onEffectCompleted:
-      m_PersistentCalls:
-        m_Calls: []
-    overrideTagEffects: 0
-  updatesPerSecond: 30
+  AngleMultiplier: 0.1
+  SpeedMultiplier: 2
+  CurveScale: 0.7
 --- !u!1 &4466055062140042080
 GameObject:
   m_ObjectHideFlags: 0
