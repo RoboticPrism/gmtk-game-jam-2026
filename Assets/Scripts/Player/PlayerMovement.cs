@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
+
 public class PlayerMovement : MonoBehaviour
 {
     private InputSystem_Actions controls;
@@ -66,21 +67,25 @@ public class PlayerMovement : MonoBehaviour
             if (moveInput.x > deadzone && moveInput.x > moveInput.y)
             {
                 targetLocation = currentGridLocation + Vector3Int.right;
+                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.RIGHT);
             }
             // If moving left
             else if(moveInput.x < -deadzone && moveInput.x < moveInput.y)
             {
                 targetLocation = currentGridLocation + Vector3Int.left;
+                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.LEFT);
             }
             // If moving up
             else if(moveInput.y > deadzone && moveInput.y > moveInput.x)
             {
                 targetLocation = currentGridLocation + Vector3Int.up;
+                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.UP);
             }
             // If moving down
             else if(moveInput.y < -deadzone && moveInput.y < moveInput.x)
             {
                 targetLocation = currentGridLocation + Vector3Int.down;
+                Player.singleton.playerAnimator.SetMoveDirection(MoveDirection.DOWN);
             }
             else
             {

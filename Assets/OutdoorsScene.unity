@@ -708,6 +708,34 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1097245745}
   m_CullTransparentMesh: 1
+--- !u!212 &1779436223 stripped
+SpriteRenderer:
+  m_CorrespondingSourceObject: {fileID: 6089038807575220837, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+  m_PrefabInstance: {fileID: 5510337450872125596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1817211855 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4593639799635864630, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+  m_PrefabInstance: {fileID: 5510337450872125596}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1817211861
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1817211855}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace66f25545392b4e940afc7dd8c3939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
+  idle: {fileID: 21300000, guid: fa80f71e69cb6ac4ea2f1f062c7580c0, type: 3}
+  up: {fileID: 21300000, guid: ab4ad657fb691ad428e8bb9e9f04de02, type: 3}
+  down: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
+  left: {fileID: 21300000, guid: 89b9bb808e2ecf641ac1ebf8fd42562b, type: 3}
+  right: {fileID: 0}
+  spriteRenderer: {fileID: 1779436223}
 --- !u!1 &2013410473
 GameObject:
   m_ObjectHideFlags: 1
@@ -857,6 +885,26 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5899290522328965826, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: resourceInventorySlots.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899290522328965826, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: resourceInventorySlots.Array.data[0].amount
+      value: 200
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899290522328965826, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: resourceInventorySlots.Array.data[1].amount
+      value: 20
+      objectReference: {fileID: 0}
+    - target: {fileID: 5899290522328965826, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: resourceInventorySlots.Array.data[1].resourceType
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6089038807575220837, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
     - target: {fileID: 8697113804776377361, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
       propertyPath: colisionTilemap
       value: 
@@ -864,7 +912,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 4593639799635864630, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1817211861}
   m_SourcePrefab: {fileID: 100100000, guid: 00edddcf1dec3d64482823bf894a6c6a, type: 3}
 --- !u!1001 &5796868982616495295
 PrefabInstance:
@@ -917,6 +968,10 @@ PrefabInstance:
     - target: {fileID: 618198040910824828, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
       propertyPath: m_Name
       value: Grid
+      objectReference: {fileID: 0}
+    - target: {fileID: 794822401453136470, guid: d756dcbb3218e1246aa5a2bc6c816894, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

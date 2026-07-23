@@ -218,7 +218,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 2dafb5c3ddb337441ad40b6bd7c2b6b3, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -241,6 +241,7 @@ GameObject:
   - component: {fileID: 3482307385310373614}
   - component: {fileID: 8697113804776377361}
   - component: {fileID: 5899290522328965826}
+  - component: {fileID: 3884945719180659796}
   - component: {fileID: 5981694376199197245}
   m_Layer: 0
   m_Name: Player
@@ -278,9 +279,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a6029a67c6841c498bed56d2585da80, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
-  singleton: {fileID: 0}
   playerMovement: {fileID: 8697113804776377361}
   playerInventory: {fileID: 5899290522328965826}
+  playerAnimator: {fileID: 3884945719180659796}
 --- !u!114 &8697113804776377361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -300,6 +301,7 @@ MonoBehaviour:
   bumpCooldownSeconds: 0.5
   isMoveOnCooldown: 0
   currentGridLocation: {x: 2, y: 0, z: 0}
+  moveDirection: 0
 --- !u!114 &5899290522328965826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -312,7 +314,29 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33167f61d102d924198e79c8734dc0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  resourceInventorySlots: []
+  resourceInventorySlots:
+  - resourceType: 0
+    amount: 200
+  - resourceType: 1
+    amount: 20
+--- !u!114 &3884945719180659796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593639799635864630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ace66f25545392b4e940afc7dd8c3939, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
+  idle: {fileID: 21300000, guid: fa80f71e69cb6ac4ea2f1f062c7580c0, type: 3}
+  up: {fileID: 21300000, guid: ab4ad657fb691ad428e8bb9e9f04de02, type: 3}
+  down: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
+  left: {fileID: 21300000, guid: 89b9bb808e2ecf641ac1ebf8fd42562b, type: 3}
+  right: {fileID: 0}
+  spriteRenderer: {fileID: 6089038807575220837}
 --- !u!114 &5981694376199197245
 MonoBehaviour:
   m_ObjectHideFlags: 0

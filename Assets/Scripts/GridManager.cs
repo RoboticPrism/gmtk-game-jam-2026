@@ -27,5 +27,8 @@ public class GridManager : MonoBehaviour
         {
             singleton = this;
         }
+
+        // So we don't have to keep hiding and unhiding this to do map edits
+        fogOfWarTilemap.gameObject.SetActive(true);
     }
 }
