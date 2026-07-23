@@ -25,6 +25,7 @@ public class Pyre : BumpableTile
 
     public override void OnBump()
     {
+        base.OnBump();
         if(Player.singleton.playerInventory.GetHeldAmount(ResourceType.WOOD) >= refuelCost)
         {
             Player.singleton.playerInventory.SpendResourcesOnTarget(ResourceType.WOOD, transform, refuelCost);

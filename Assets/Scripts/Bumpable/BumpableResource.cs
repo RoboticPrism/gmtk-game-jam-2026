@@ -21,6 +21,7 @@ public class BumpableResource : BumpableTile
 
     public override void OnBump()
     {
+        base.OnBump();
         if(health > 0)
         {
             health -= 1;
