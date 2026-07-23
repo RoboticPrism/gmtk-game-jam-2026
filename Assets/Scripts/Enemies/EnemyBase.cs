@@ -54,6 +54,12 @@ public class EnemyBase : BumpableTile
         transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed);
     }
 
+    protected void MoveToLocation(Vector3Int gridLocation)
+    {
+        this.gridLocation = gridLocation;
+        visualTargetLocation = gridLocation;
+    }
+
     public virtual void Defeat()
     {
         EnemyDefeatEffect effect = Instantiate(defeatEffectPrefab, transform.position, Quaternion.identity);

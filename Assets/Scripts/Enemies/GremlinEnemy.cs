@@ -123,21 +123,20 @@ public class GremlinEnemy : EnemyBase
         switch(chosenDirection)
         {
             case EnemyDirections.UP:
-                gridLocation += Vector3Int.up;
+                MoveToLocation(gridLocation + Vector3Int.up);
                 break;
             case EnemyDirections.DOWN:
-                gridLocation += Vector3Int.down;
+                MoveToLocation(gridLocation + Vector3Int.down);
                 break;
             case EnemyDirections.LEFT:
-                gridLocation += Vector3Int.left;
+                MoveToLocation(gridLocation + Vector3Int.left);
                 spriteRenderer.transform.localScale = Vector3.one;
                 break;
             case EnemyDirections.RIGHT:
-                gridLocation += Vector3Int.right;
+                MoveToLocation(gridLocation + Vector3Int.right);
                 spriteRenderer.transform.localScale = new Vector3(-1,1,1);
                 break;
         }
-        visualTargetLocation = gridLocation;
     }
 
     public void DoChase(List<Vector3Int> pathToPlayer)
@@ -167,8 +166,7 @@ public class GremlinEnemy : EnemyBase
             {
                 spriteRenderer.transform.localScale = new Vector3(-1,1,1);
             }
-            gridLocation = pathToPlayer[0];
-            visualTargetLocation = gridLocation;
+            MoveToLocation(pathToPlayer[0]);
         }
     }
 
