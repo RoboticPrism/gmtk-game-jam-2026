@@ -6,20 +6,25 @@ public class AudioManager : MonoBehaviour
     [Header("Audio Sources")]
     [SerializeField] private AudioSource musicSource;
     
+    [SerializeField] private AudioSource buttonSFXSource;
+    
 
-    public void PlayMusic(AudioClip clip, bool loop = true)
+    public void PlayMusic()
     {
-        if (clip == null)
-            return;
-
-        musicSource.clip = clip;
-        musicSource.loop = loop;
+        musicSource.loop = true;
         musicSource.Play();
     }
-
+    public void PlayButtonSFX()
+    {
+        buttonSFXSource.Play();
+    }
     public void StopMusic()
     {
         musicSource.Stop();
+    }
+    public void StopButtonSFX()
+    {
+        buttonSFXSource.Stop();
     }
     
 }
