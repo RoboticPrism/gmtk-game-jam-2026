@@ -109,6 +109,7 @@ public class PlayerMovement : MonoBehaviour
         currentGridLocation = targetPosition;
         visualTargetLocation = targetPosition;
         FogOfWarManager.TriggerLightingUpdate();
+        CounterManager.singleton.UseStep();
     }
 
     private Coroutine moveCoroutine;
@@ -130,13 +131,14 @@ public class PlayerMovement : MonoBehaviour
 
     private bool CheckBumpableAtLocation(Vector3Int location)
     {
-        return GridManager.singleton.resourceTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>() != null;
+        return GridManager.singleton.resourceTilemap.GetInstantiatedObject(location)?.GetComponent<BumpableTile>() != null;
     }
 
     private void BumpBumpableAtLocation(Vector3Int location)
     {
         GridManager.singleton.resourceTilemap.GetInstantiatedObject(location).GetComponent<BumpableTile>().OnBump();
         DoBumpCooldown(location);
+        CounterManager.singleton.UseStep();
     }
 
     private Coroutine bumpCoroutine;

@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 6212116907353838432}
   - component: {fileID: 7649564817014927504}
+  - component: {fileID: 3449897622630197691}
   m_Layer: 0
   m_Name: Pyre
   m_TagString: Untagged
@@ -45,3 +46,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::FogOfWarLight
   lightRadius: 5
+--- !u!114 &3449897622630197691
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5168549127313681716}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01b6914080cd2ff4585dc92d1ddf0bde, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Pyre
+  refuelCost: 20
+  refuelSteps: 50

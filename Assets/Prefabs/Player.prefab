@@ -301,7 +301,6 @@ MonoBehaviour:
   bumpCooldownSeconds: 0.5
   isMoveOnCooldown: 0
   currentGridLocation: {x: 2, y: 0, z: 0}
-  moveDirection: 0
 --- !u!114 &5899290522328965826
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -319,6 +318,8 @@ MonoBehaviour:
     amount: 200
   - resourceType: 1
     amount: 20
+  resourceSpendPrefab: {fileID: 946341938395503925, guid: cc7cda69fa1ba7e4da1d93f191563a5f, type: 3}
+  resourceSpendDelaySeconds: 0.05
 --- !u!114 &3884945719180659796
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -335,8 +336,9 @@ MonoBehaviour:
   up: {fileID: 21300000, guid: ab4ad657fb691ad428e8bb9e9f04de02, type: 3}
   down: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
   left: {fileID: 21300000, guid: 89b9bb808e2ecf641ac1ebf8fd42562b, type: 3}
-  right: {fileID: 0}
   spriteRenderer: {fileID: 6089038807575220837}
+  returnToIdleSeconds: 0.6
+  moveDirection: 0
 --- !u!114 &5981694376199197245
 MonoBehaviour:
   m_ObjectHideFlags: 0
