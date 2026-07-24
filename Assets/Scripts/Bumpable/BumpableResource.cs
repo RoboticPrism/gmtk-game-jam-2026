@@ -22,6 +22,9 @@ public class BumpableResource : BumpableTile
     [SerializeField]
     private DestroyEffect destroyEffectPrefab;
 
+    [SerializeField]
+    private bool effectedByDropMultiplier = true;
+
     public override void OnBump()
     {
         base.OnBump();
@@ -32,7 +35,12 @@ public class BumpableResource : BumpableTile
         else
         {
             // Drop resources
-            for (int i = 0; i < Random.Range(dropMin + Player.singleton.playerUpgrades.resourceGainIncrease, dropMax + Player.singleton.playerUpgrades.resourceGainIncrease); i++)
+            int resourceGainIncrease = 0;
+            if(effectedByDropMultiplier)
+            {
+                resourceGainIncrease += Player.singleton.playerUpgrades.resourceGainIncrease;
+            }
+            for (int i = 0; i < Random.Range(dropMin + resourceGainIncrease, dropMax + resourceGainIncrease); i++)
             {
                 ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, transform.position, Quaternion.identity);
                 drop.SetResourceType(resourceType);

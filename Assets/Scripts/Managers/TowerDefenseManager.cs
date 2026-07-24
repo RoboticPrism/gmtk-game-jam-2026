@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
+using UnityEngine.SceneManagement;
 
 public class TowerDefenseManager : MonoBehaviour
 {
@@ -182,6 +183,10 @@ public class TowerDefenseManager : MonoBehaviour
 
         yield return new WaitForSeconds(5f);
 
+        ScreenEffectManager.singleton.FadeOut();
+        yield return new WaitForSeconds(2f);
+
         // warp to title screen
+        SceneManager.LoadScene("MainMenu");
     }
 }

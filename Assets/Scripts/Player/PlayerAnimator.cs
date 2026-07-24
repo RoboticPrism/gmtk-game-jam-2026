@@ -12,10 +12,19 @@ public class PlayerAnimator : MonoBehaviour
     private Sprite up;
 
     [SerializeField]
+    private Sprite upAlt;
+
+    [SerializeField]
     private Sprite down;
 
     [SerializeField]
+    private Sprite downAlt;
+
+    [SerializeField]
     private Sprite left;
+
+    [SerializeField]
+    private Sprite leftAlt;
 
     [SerializeField]
     private SpriteRenderer spriteRenderer;
@@ -49,6 +58,8 @@ public class PlayerAnimator : MonoBehaviour
 
     private AudioSource audioSource;
 
+    private bool altSprite = false;
+
     public void Start()
     {
         audioSource = GetComponent<AudioSource>();
@@ -65,16 +76,44 @@ public class PlayerAnimator : MonoBehaviour
                 spriteRenderer.sprite = idle;
                 break;
             case MoveDirection.UP:
-                spriteRenderer.sprite = up;
+                if (altSprite)
+                {
+                    spriteRenderer.sprite = upAlt;
+                }
+                else
+                {
+                    spriteRenderer.sprite = up;
+                }
                 break;
             case MoveDirection.DOWN:
-                spriteRenderer.sprite = down;
+                if (altSprite)
+                {
+                    spriteRenderer.sprite = downAlt;
+                }
+                else
+                {
+                    spriteRenderer.sprite = down;
+                }
                 break;
             case MoveDirection.LEFT:
-                spriteRenderer.sprite = left;
+                if (altSprite)
+                {
+                    spriteRenderer.sprite = leftAlt;
+                }
+                else
+                {
+                    spriteRenderer.sprite = left;
+                }
                 break;
             case MoveDirection.RIGHT:
-                spriteRenderer.sprite = left;
+                if (altSprite)
+                {
+                    spriteRenderer.sprite = leftAlt;
+                }
+                else
+                {
+                    spriteRenderer.sprite = left;
+                }
                 spriteRenderer.transform.localScale = new Vector3(-1, 1, 1);
                 break;
         }
@@ -88,6 +127,7 @@ public class PlayerAnimator : MonoBehaviour
     public void SetMoveDirection(MoveDirection moveDirection)
     {
         this.moveDirection = moveDirection;
+        altSprite = !altSprite;
         audioSource.pitch = Random.Range(0.8f, 1.2f);
         audioSource.PlayOneShot(stepClip);
 
