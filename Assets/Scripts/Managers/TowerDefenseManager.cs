@@ -74,6 +74,8 @@ public class TowerDefenseManager : MonoBehaviour
 
         GridManager.singleton.StartTowerDefense();
 
+        BackgroundMusicManager.singleton.StartDefendMusic();
+
         // Save and update the pyre's old light radius
         previousPyreLightRadius = Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius;
         Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = defenseModePyreLightRadius;
@@ -93,6 +95,8 @@ public class TowerDefenseManager : MonoBehaviour
         isTowerDefenseMode = false;
 
         GridManager.singleton.EndTowerDefense();
+
+        BackgroundMusicManager.singleton.StartExploreMusic();
 
         // Restore pyre light radius
         Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = previousPyreLightRadius;

@@ -27,6 +27,9 @@ public class Turret : BumpableTile
 
     private UpgradeCostUI upgradeCostUIInstance;
 
+    [SerializeField]
+    private AudioClip buildClip;
+
     public void Awake()
     {
         TurretManager.singleton.AddTurret(this);
@@ -38,6 +41,10 @@ public class Turret : BumpableTile
         currentCooldown = cooldownBetweenShots;
         currentAmmo = maxAmmo;
         CreateUI();
+        if (buildClip)
+        {
+            audioSource.PlayOneShot(buildClip);
+        }
     }
 
     public void Update()

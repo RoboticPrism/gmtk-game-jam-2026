@@ -56,6 +56,9 @@ public class PlayerAnimator : MonoBehaviour
     [SerializeField]
     private AudioClip stepClip;
 
+    [SerializeField]
+    private AudioSource teleportSource;
+
     private AudioSource audioSource;
 
     private bool altSprite = false;
@@ -183,6 +186,15 @@ public class PlayerAnimator : MonoBehaviour
 
     public void SetTeleportSize()
     {
+        if (Player.singleton.playerMovement.currentTeleportChannel > 0)
+        {
+            teleportSource.volume = 1;
+            teleportSource.pitch = 1f + (Player.singleton.playerMovement.currentTeleportChannel / 4f);
+        }
+        else
+        {
+            teleportSource.volume = 0;
+        }
         teleportRenderer.transform.localScale = Player.singleton.playerMovement.currentTeleportChannel * teleportAuraRadio * Vector3.one;
     }
 
@@ -197,10 +209,13 @@ public class PlayerAnimator : MonoBehaviour
         teleportRenderer.sortingOrder = teleportSpriteAnimationLayer;
 
         float currentTime = 0f;
+        teleportSource.volume = 1f;
         while (currentTime < 2f)
         {
             currentTime += Time.deltaTime;
             teleportRenderer.transform.localScale = Mathf.Lerp(0f, 2f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            teleportSource.pitch = 1f + (currentTime / 4f);
+            
             yield return null;
         }
 
@@ -212,9 +227,11 @@ public class PlayerAnimator : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             teleportRenderer.transform.localScale = Mathf.Lerp(2f, 0f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            teleportSource.pitch = 1.5f - (currentTime / 4f);
             yield return null;
         }
         teleportAnimating = false;
+        teleportSource.volume = 0f;
     }
 
     public void AnimateForcedTeleport()
@@ -224,6 +241,7 @@ public class PlayerAnimator : MonoBehaviour
     IEnumerator ForcedTeleportAnimation() 
     {
         teleportAnimating = true;
+        teleportSource.volume = 1f;
         teleportRenderer.sortingOrder = teleportSpriteLayer;
 
         float currentTime = 0f;
@@ -231,6 +249,7 @@ public class PlayerAnimator : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             teleportRenderer.transform.localScale = Mathf.Lerp(0f, 2f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            teleportSource.pitch = 1f + (currentTime / 4f);
             yield return null;
         }
 
@@ -242,8 +261,10 @@ public class PlayerAnimator : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             teleportRenderer.transform.localScale = Mathf.Lerp(2f, 0f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            teleportSource.pitch = 1f + (currentTime / 4f);
             yield return null;
         }
         teleportAnimating = false;
+        teleportSource.volume = 0f;
     }
 }
