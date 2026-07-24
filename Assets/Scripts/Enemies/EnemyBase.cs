@@ -80,7 +80,9 @@ public class EnemyBase : BumpableTile
     public override void OnBump()
     {
         base.OnBump();
-        currentHealth--;
+
+        currentHealth -= Player.singleton.playerUpgrades.playerDamage;
+        
         if(currentHealth <= 0)
         {
             Defeat(); 
