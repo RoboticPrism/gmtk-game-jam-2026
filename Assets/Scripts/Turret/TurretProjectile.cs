@@ -10,10 +10,24 @@ public class TurretProjectile : MonoBehaviour
     private TowerDefenseGremlin target;
     private Vector3 lastTargetLocation;
 
+    [SerializeField]
+    private AudioClip shootClip;
+
+    private AudioSource audioSource;
+
+    public void Awake()
+    {
+        audioSource = GetComponent<AudioSource>();
+    }
+
     public void Setup(Turret turret, TowerDefenseGremlin target)
     {
         this.turret = turret;
         this.target = target;
+        if (shootClip)
+        {
+            audioSource.PlayOneShot(shootClip);
+        }
     }
 
     private float timeElapsed = 0f;
