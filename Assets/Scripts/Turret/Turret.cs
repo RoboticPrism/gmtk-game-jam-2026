@@ -28,7 +28,13 @@ public class Turret : BumpableTile
     private UpgradeCostUI upgradeCostUIInstance;
 
     [SerializeField]
+    private GameObject outOfAmmoAlert;
+
+    [SerializeField]
     private AudioClip buildClip;
+
+    [SerializeField]
+    private AudioClip outOfAmmoClip;
 
     public void Awake()
     {
@@ -50,6 +56,7 @@ public class Turret : BumpableTile
     public void Update()
     {
         upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode);
+        outOfAmmoAlert.SetActive(TowerDefenseManager.singleton.isTowerDefenseMode && currentAmmo <= 0);
     }
 
     private void CreateUI()
@@ -68,6 +75,14 @@ public class Turret : BumpableTile
                 ShootProjectile();
                 currentCooldown = cooldownBetweenShots;
                 currentAmmo--;
+
+                if(currentAmmo == 0)
+                {
+                    if(outOfAmmoClip)
+                    {
+                        audioSource.PlayOneShot(outOfAmmoClip);
+                    }
+                }
             }
         }
     }
