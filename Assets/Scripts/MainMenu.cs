@@ -20,6 +20,6 @@ public class MainMenu : MonoBehaviour
         Debug.Log("Start Game");
         Bootstrap.Instance.Audio.PlayButtonSFX();
         Bootstrap.Instance.Audio.StopMusic();
-        SceneManager.LoadScene("OutdoorsScene");
+        SceneManager.LoadScene("Scenes/GameplayScene");
     }
 }

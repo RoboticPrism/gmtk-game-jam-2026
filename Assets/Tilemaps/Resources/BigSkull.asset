@@ -10,9 +10,9 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 13312, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: EmptyTurret
+  m_Name: BigSkull
   m_EditorClassIdentifier: UnityEngine.dll::UnityEngine.Tilemaps.Tile
-  m_Sprite: {fileID: 21300000, guid: 99d4a22e503f0dd479c55de7efb516fd, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 232c24eb570a22348aa87c2dcac9d8bf, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_Transform:
     e00: 1
@@ -31,6 +31,6 @@ MonoBehaviour:
     e31: 0
     e32: 0
     e33: 1
-  m_InstancedGameObject: {fileID: 6977470316275404571, guid: 4a0a183fb3e0c6e43b0ca465b76c4605, type: 3}
+  m_InstancedGameObject: {fileID: 8338416179342282145, guid: edae4eeb70f313842b6a8b21f4320ce6, type: 3}
   m_Flags: 1
   m_ColliderType: 1

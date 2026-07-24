@@ -28,11 +28,24 @@ public class EnemyBase : BumpableTile
     [Tooltip("How many bumps the enemy takes to kill")]
     protected float maxHealth;
 
+    [SerializeField]
     protected float currentHealth; 
 
     [SerializeField]
     [Tooltip("How long the enemy takes to do a bump animation")]
     protected float bumpCooldownSeconds;
+
+    [SerializeField]
+    [Tooltip("What type of resource does this drop")]
+    public ResourceType resourceType;
+
+    [SerializeField]
+    [Tooltip("Whats the minimum drop ammount")]
+    public int dropMin;
+
+    [SerializeField]
+    [Tooltip("Whats the maxmimum drop ammount")]
+    public int dropMax;
 
     public enum EnemyDirections { UP, DOWN, LEFT, RIGHT }
 
@@ -62,6 +75,14 @@ public class EnemyBase : BumpableTile
 
     public virtual void Defeat()
     {
+        // Drop resources
+        for (int i = 0; i < Random.Range(dropMin + Player.singleton.playerUpgrades.resourceGainIncrease, dropMax + Player.singleton.playerUpgrades.resourceGainIncrease); i++)
+        {
+            ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, transform.position, Quaternion.identity);
+            drop.SetResourceType(resourceType);
+        }
+        
+        // Create effect
         EnemyDefeatEffect effect = Instantiate(defeatEffectPrefab, transform.position, Quaternion.identity);
         effect.Setup(defeatClip);
         Destroy(gameObject);
@@ -80,7 +101,19 @@ public class EnemyBase : BumpableTile
     public override void OnBump()
     {
         base.OnBump();
-        currentHealth--;
+
+        currentHealth -= Player.singleton.playerUpgrades.playerDamage;
+        
+        if(currentHealth <= 0)
+        {
+            Defeat(); 
+        }
+    }
+
+    public void OnShotByTurret(Turret turret)
+    {
+        currentHealth -= turret.damage; 
+        
         if(currentHealth <= 0)
         {
             Defeat(); 

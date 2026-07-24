@@ -5,7 +5,7 @@ public class BumpableResource : BumpableTile
 {
     [SerializeField]
     [Tooltip("How many hits this takes to break")]
-    public int health;
+    public float health;
 
     [SerializeField]
     [Tooltip("What type of resource does this drop")]
@@ -27,12 +27,12 @@ public class BumpableResource : BumpableTile
         base.OnBump();
         if(health > 0)
         {
-            health -= 1;
+            health -= Player.singleton.playerUpgrades.playerDamage;
         }
         else
         {
             // Drop resources
-            for (int i = 0; i < Random.Range(dropMin, dropMax); i++)
+            for (int i = 0; i < Random.Range(dropMin + Player.singleton.playerUpgrades.resourceGainIncrease, dropMax + Player.singleton.playerUpgrades.resourceGainIncrease); i++)
             {
                 ResourceDrop drop = Instantiate(ResourceDictionary.singleton.resourceDropPrefab, transform.position, Quaternion.identity);
                 drop.SetResourceType(resourceType);
