@@ -1033,7 +1033,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_MaskInteraction: 0
-  m_Sprite: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
+  m_Sprite: {fileID: 21300000, guid: fd826924f2745f44d983e1a4ed14d3c6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -1211,10 +1211,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ace66f25545392b4e940afc7dd8c3939, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerAnimator
-  idle: {fileID: 21300000, guid: fa80f71e69cb6ac4ea2f1f062c7580c0, type: 3}
-  up: {fileID: 21300000, guid: ab4ad657fb691ad428e8bb9e9f04de02, type: 3}
-  down: {fileID: 21300000, guid: 228524dbb96d6464da567ef089aa2a4a, type: 3}
-  left: {fileID: 21300000, guid: 89b9bb808e2ecf641ac1ebf8fd42562b, type: 3}
+  idle: {fileID: 21300000, guid: fd826924f2745f44d983e1a4ed14d3c6, type: 3}
+  up: {fileID: 21300000, guid: 0ebb1c7433e4e18499fb82ef980d7692, type: 3}
+  upAlt: {fileID: 21300000, guid: 21d3a4983f570d2438954a5f2a79d9d4, type: 3}
+  down: {fileID: 21300000, guid: 11a74f08329328440a6fd713ba352743, type: 3}
+  downAlt: {fileID: 21300000, guid: 80bb30fbb25477544b3ebd7ec0f6817b, type: 3}
+  left: {fileID: 21300000, guid: 90d516385bb603a49bd337a4710154cc, type: 3}
+  leftAlt: {fileID: 21300000, guid: ce9c222171bb47847b304d62e7555759, type: 3}
   spriteRenderer: {fileID: 6089038807575220837}
   teleportRenderer: {fileID: 5049978648729472446}
   slashObject: {fileID: 6397499624424389069}
