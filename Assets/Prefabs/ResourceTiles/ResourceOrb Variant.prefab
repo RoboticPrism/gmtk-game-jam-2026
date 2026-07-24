@@ -68,6 +68,10 @@ PrefabInstance:
       propertyPath: resourceType
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 7639706657907935717, guid: d319fccdcd39f354db77bc8eff920f21, type: 3}
+      propertyPath: effectedByDropMultiplier
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
