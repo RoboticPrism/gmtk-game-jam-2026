@@ -54,7 +54,11 @@ MonoBehaviour:
   defeatClip: {fileID: 8300000, guid: b04dc25852a006a4a887fd2e3adbee2d, type: 3}
   moveSpeed: 0.2
   maxHealth: 2
+  currentHealth: 0
   bumpCooldownSeconds: 1
+  resourceType: 6
+  dropMin: 1
+  dropMax: 1
   enemyDirection: 0
   moveDirection: 1
 --- !u!82 &9217630354674859051
