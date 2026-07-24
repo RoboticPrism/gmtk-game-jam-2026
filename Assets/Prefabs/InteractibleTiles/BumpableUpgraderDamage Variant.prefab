@@ -10,7 +10,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 5190108042042248754, guid: a5c3c555b51dde24bb7d279597a2f3f9, type: 3}
       propertyPath: m_Name
-      value: BumpableUpgrader Variant
+      value: BumpableUpgraderDamage Variant
       objectReference: {fileID: 0}
     - target: {fileID: 5986239473595721806, guid: a5c3c555b51dde24bb7d279597a2f3f9, type: 3}
       propertyPath: m_LocalPosition.x
