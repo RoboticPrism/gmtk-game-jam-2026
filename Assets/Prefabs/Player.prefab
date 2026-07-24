@@ -242,6 +242,7 @@ GameObject:
   - component: {fileID: 8697113804776377361}
   - component: {fileID: 5899290522328965826}
   - component: {fileID: 3884945719180659796}
+  - component: {fileID: 2812690706676630120}
   - component: {fileID: 5981694376199197245}
   - component: {fileID: 420456912304666527}
   m_Layer: 0
@@ -284,6 +285,7 @@ MonoBehaviour:
   playerMovement: {fileID: 8697113804776377361}
   playerInventory: {fileID: 5899290522328965826}
   playerAnimator: {fileID: 3884945719180659796}
+  playerUpgrades: {fileID: 2812690706676630120}
 --- !u!114 &8697113804776377361
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -350,6 +352,95 @@ MonoBehaviour:
   returnToIdleSeconds: 0.6
   moveDirection: 0
   stepClip: {fileID: 8300000, guid: 9949695a721cae046ac8bcd8265ebada, type: 3}
+--- !u!114 &2812690706676630120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4593639799635864630}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 93cee742043fb504a93f244167fc1ce2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerUpgrades
+  currentUpgrades:
+  - upgradeType: 0
+    upgradeName: Light Radius
+    currentLevel: 0
+    maxLevel: 3
+    levelCosts:
+    - level: 1
+      subcosts:
+      - resourceType: 0
+        amount: 10
+    - level: 2
+      subcosts:
+      - resourceType: 0
+        amount: 30
+    - level: 3
+      subcosts:
+      - resourceType: 0
+        amount: 30
+      - resourceType: 2
+        amount: 30
+  - upgradeType: 1
+    upgradeName: Resource Gain
+    currentLevel: 0
+    maxLevel: 3
+    levelCosts:
+    - level: 1
+      subcosts:
+      - resourceType: 0
+        amount: 10
+      - resourceType: 1
+        amount: 10
+    - level: 2
+      subcosts:
+      - resourceType: 0
+        amount: 10
+      - resourceType: 1
+        amount: 10
+      - resourceType: 4
+        amount: 10
+    - level: 3
+      subcosts:
+      - resourceType: 0
+        amount: 10
+      - resourceType: 1
+        amount: 10
+      - resourceType: 4
+        amount: 10
+      - resourceType: 3
+        amount: 1
+  - upgradeType: 2
+    upgradeName: Attack Damage
+    currentLevel: 0
+    maxLevel: 3
+    levelCosts:
+    - level: 1
+      subcosts:
+      - resourceType: 1
+        amount: 10
+    - level: 2
+      subcosts:
+      - resourceType: 1
+        amount: 10
+      - resourceType: 4
+        amount: 10
+    - level: 3
+      subcosts:
+      - resourceType: 1
+        amount: 10
+      - resourceType: 4
+        amount: 10
+      - resourceType: 3
+        amount: 1
+  playerDamage: 1
+  damageIncreaseIncrement: 0.5
+  lightRadiusIncreaseIncrement: 1
+  resourceGainIncrease: 0
+  resourceGainIncreaseIncrement: 1
 --- !u!114 &5981694376199197245
 MonoBehaviour:
   m_ObjectHideFlags: 0
