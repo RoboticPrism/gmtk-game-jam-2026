@@ -14,11 +14,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 243112477288601943, guid: 7e2a69e7f69140c45ad3f9adb46ef38f, type: 3}
       propertyPath: dropMax
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 243112477288601943, guid: 7e2a69e7f69140c45ad3f9adb46ef38f, type: 3}
       propertyPath: dropMin
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 243112477288601943, guid: 7e2a69e7f69140c45ad3f9adb46ef38f, type: 3}
       propertyPath: resourceType

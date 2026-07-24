@@ -54,7 +54,11 @@ MonoBehaviour:
   defeatClip: {fileID: 8300000, guid: aba245ef4635eba4ea0b782d446816ee, type: 3}
   moveSpeed: 0.2
   maxHealth: 3
+  currentHealth: 0
   bumpCooldownSeconds: 1
+  resourceType: 6
+  dropMin: 1
+  dropMax: 2
   enemyDirection: 0
   gremlinState: 1
   passiveClip: {fileID: 8300000, guid: f814da16bff0f7f408f515187534e58f, type: 3}

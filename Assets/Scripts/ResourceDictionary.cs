@@ -2,7 +2,7 @@ using UnityEngine;
 using System.Collections.Generic;
 using System.Linq;
 
-public enum ResourceType { WOOD, STONE, MUSHROOM, ORB, SKULL }
+public enum ResourceType { WOOD, STONE, MUSHROOM, ORB, SKULL, BIG_SKULL, SOUL }
 
 public class ResourceDictionary : MonoBehaviour
 {
