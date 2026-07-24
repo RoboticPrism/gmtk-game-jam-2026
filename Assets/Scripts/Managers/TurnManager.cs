@@ -20,5 +20,6 @@ public class TurnManager : MonoBehaviour
     {
         TowerDefenseManager.singleton.DoTurn();
         EnemyManager.singleton.DoEnemyTurns();
+        TurretManager.singleton.DoTurn();
     }
 }

@@ -14,10 +14,12 @@ public class TowerDefenseManager : MonoBehaviour
     [Tooltip("The enemy that spawns in tower defense mode")]
     private TowerDefenseGremlin gremlinPrefab;
 
-    private List<TowerDefenseGremlin> instantiatedGremlins = new List<TowerDefenseGremlin>();
+    public List<TowerDefenseGremlin> instantiatedGremlins = new List<TowerDefenseGremlin>();
 
+    [SerializeField]
     private List<SpawnPoint> allSpawnPoints;
 
+    [SerializeField]
     private List<SpawnPoint> recentlyUsedSpawnPoints = new List<SpawnPoint>();
 
     [SerializeField]
@@ -87,6 +89,7 @@ public class TowerDefenseManager : MonoBehaviour
         // Reenable player's light radius 
         Player.singleton.GetComponent<FogOfWarLight>().lightRadius = playerLightRadius;
         FogOfWarManager.TriggerLightingUpdate();
+        CounterManager.singleton.steps = CounterManager.singleton.startingSteps;
     }
 
     public void DoTurn()
@@ -112,7 +115,7 @@ public class TowerDefenseManager : MonoBehaviour
     public void SpawnGremlin()
     {
         // Chose a spawn point that hasn't been used recently
-        List<SpawnPoint> availableSpawnPoints = allSpawnPoints;
+        List<SpawnPoint> availableSpawnPoints = new List<SpawnPoint>(allSpawnPoints);
         availableSpawnPoints.RemoveAll(point => recentlyUsedSpawnPoints.Contains(point));
         SpawnPoint spawnPoint = availableSpawnPoints[Random.Range(0, availableSpawnPoints.Count)];
         
@@ -131,7 +134,7 @@ public class TowerDefenseManager : MonoBehaviour
     {
         instantiatedGremlins.Remove(gremlin);
 
-        if(instantiatedGremlins.Count == 0)
+        if(instantiatedGremlins.Count == 0 && currentWave.gremlinCount <= 0)
         {
             EndTowerDefenseMode();
         }

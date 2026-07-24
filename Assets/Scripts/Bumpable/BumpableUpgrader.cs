@@ -22,10 +22,10 @@ public class BumpableUpgrader : BumpableTile
     {
         string upgradeName = Player.singleton.playerUpgrades.GetUpgradeByType(upgradeType).upgradeName;
         int upgradeLevel = Player.singleton.playerUpgrades.GetUpgradeByType(upgradeType).currentLevel + 1;
-        PlayerUpgrades.UpgradeCost upgradeCost = Player.singleton.playerUpgrades.GetCostForNextLevelForUpgradeType(upgradeType);
+        Cost upgradeCost = Player.singleton.playerUpgrades.GetCostForNextLevelForUpgradeType(upgradeType);
 
         upgradeCostUIInstance = Instantiate(upgradeCostUIPrefab, transform.position, Quaternion.identity);
-        upgradeCostUIInstance.Setup(upgradeName, upgradeLevel, upgradeCost);
+        upgradeCostUIInstance.Setup(upgradeName + " Lvl. " + upgradeLevel, upgradeCost);
     }
 
     // Update is called once per frame

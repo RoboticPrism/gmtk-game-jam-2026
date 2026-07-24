@@ -13,21 +13,7 @@ public class PlayerUpgrades : MonoBehaviour
         public string upgradeName;
         public int currentLevel = 1;
         public int maxLevel;
-        public List<UpgradeCost> levelCosts = new List<UpgradeCost>();
-    }
-
-    [System.Serializable]
-    public class UpgradeCost
-    {
-        public int level;
-        public List<UpgradeSubcost> subcosts;
-    }
-
-    [System.Serializable]
-    public class UpgradeSubcost
-    {
-        public ResourceType resourceType;
-        public int amount;
+        public List<Cost> levelCosts = new List<Cost>();
     }
 
     [SerializeField]
@@ -58,64 +44,39 @@ public class PlayerUpgrades : MonoBehaviour
         return GetUpgradeByType(upgradeType).currentLevel;
     }
 
-    public UpgradeCost GetCostForNextLevelForUpgradeType(UpgradeTypes upgradeType)
+    public Cost GetCostForNextLevelForUpgradeType(UpgradeTypes upgradeType)
     {
         int nextLevel = GetLevelForUpgradeType(upgradeType) + 1;
         return CheckCostForLevel(upgradeType, nextLevel);
     }
 
-    public UpgradeCost CheckCostForLevel(UpgradeTypes upgradeType, int level)
+    public Cost CheckCostForLevel(UpgradeTypes upgradeType, int level)
     {
         Upgrade targetUpgrade = currentUpgrades.First(upgrade => upgrade.upgradeType == upgradeType);
-        UpgradeCost cost = targetUpgrade.levelCosts.First(cost => cost.level == level);
+        Cost cost = targetUpgrade.levelCosts.First(cost => cost.level == level);
         return cost;
     }
 
     public bool CheckCanBuyUpgradeForLevel(UpgradeTypes upgradeType, int level)
     {
         Upgrade targetUpgrade = currentUpgrades.First(upgrade => upgrade.upgradeType == upgradeType);
-        UpgradeCost cost = targetUpgrade.levelCosts.First(cost => cost.level == level);
-
-        bool canAfford = true;
-
-        foreach(UpgradeSubcost subcost in cost.subcosts)
-        {
-            if(Player.singleton.playerInventory.GetHeldAmount(subcost.resourceType) < subcost.amount)
-            {
-                canAfford = false;
-            }
-        }
-
-        return canAfford;
+        Cost cost = targetUpgrade.levelCosts.First(cost => cost.level == level);
+        return cost.canPlayerAfford();
     }
 
     public bool CheckCanBuyUpgradeForNextLevel(UpgradeTypes upgradeType)
     {
         Upgrade targetUpgrade = currentUpgrades.First(upgrade => upgrade.upgradeType == upgradeType);
-        UpgradeCost cost = targetUpgrade.levelCosts.First(cost => cost.level == GetLevelForUpgradeType(upgradeType) + 1);
-
-        bool canAfford = true;
-
-        foreach(UpgradeSubcost subcost in cost.subcosts)
-        {
-            if(Player.singleton.playerInventory.GetHeldAmount(subcost.resourceType) < subcost.amount)
-            {
-                canAfford = false;
-            }
-        }
-
-        return canAfford;
+        Cost cost = targetUpgrade.levelCosts.First(cost => cost.level == GetLevelForUpgradeType(upgradeType) + 1);
+        return cost.canPlayerAfford();
     }
 
     public void BuyUpgradeForNextLevel(UpgradeTypes upgradeType)
     {
         Upgrade targetUpgrade = currentUpgrades.First(upgrade => upgrade.upgradeType == upgradeType);
-        UpgradeCost cost = targetUpgrade.levelCosts.First(cost => cost.level == GetLevelForUpgradeType(upgradeType) + 1);
+        Cost cost = targetUpgrade.levelCosts.First(cost => cost.level == GetLevelForUpgradeType(upgradeType) + 1);
 
-        foreach(UpgradeSubcost subcost in cost.subcosts)
-        {
-            Player.singleton.playerInventory.RemoveItemFromInventory(subcost.resourceType, subcost.amount);
-        }
+        cost.payCost();
 
         UpgradeStat(upgradeType);
     }

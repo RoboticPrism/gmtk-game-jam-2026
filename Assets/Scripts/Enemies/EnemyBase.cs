@@ -28,6 +28,7 @@ public class EnemyBase : BumpableTile
     [Tooltip("How many bumps the enemy takes to kill")]
     protected float maxHealth;
 
+    [SerializeField]
     protected float currentHealth; 
 
     [SerializeField]
@@ -82,6 +83,16 @@ public class EnemyBase : BumpableTile
         base.OnBump();
 
         currentHealth -= Player.singleton.playerUpgrades.playerDamage;
+        
+        if(currentHealth <= 0)
+        {
+            Defeat(); 
+        }
+    }
+
+    public void OnShotByTurret(Turret turret)
+    {
+        currentHealth -= turret.damage; 
         
         if(currentHealth <= 0)
         {
