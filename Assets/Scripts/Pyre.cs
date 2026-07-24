@@ -17,6 +17,36 @@ public class Pyre : BumpableTile
     private TextMeshPro counterText;
 
     [SerializeField]
+    private SpriteRenderer spriteRenderer;
+
+    [SerializeField]
+    private Sprite highFireCount;
+
+    [SerializeField]
+    private Sprite highFireCountCombat;
+
+    [SerializeField]
+    private int highFireThreshold;
+
+    [SerializeField]
+    private Sprite mediumFireCount;
+
+    [SerializeField]
+    private Sprite mediumFireCountCombat;
+
+    [SerializeField]
+    private int mediumFireThreshold;
+
+    [SerializeField]
+    private Sprite lowFireCount;
+
+    [SerializeField]
+    private Sprite lowFireCountCombat;
+
+    [SerializeField]
+    private int lowFireThreshold;
+
+    [SerializeField]
     private TextMeshPro title;
 
     [SerializeField]
@@ -51,6 +81,21 @@ public class Pyre : BumpableTile
     {
         counterText.text = CounterManager.singleton.steps.ToString();
 
+        // Step the background based on how many steps are left
+        if(CounterManager.singleton.steps >= highFireThreshold)
+        {
+            spriteRenderer.sprite = highFireCount;
+        }
+        else if (CounterManager.singleton.steps >= mediumFireThreshold)
+        {
+            spriteRenderer.sprite = mediumFireCount;
+        }
+        else
+        {
+            spriteRenderer.sprite = lowFireCount;
+        }
+
+        // Check when to play intro animation
         if(Vector3.Distance(Player.singleton.transform.position, transform.position) < 10f && !hasAnimated) {
             hasAnimated = true;
             StartCoroutine(PyreTextAnimation());
