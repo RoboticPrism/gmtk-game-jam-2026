@@ -8,6 +8,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 2770274121866830277, guid: 827ffd0237c95114b87e7e8a2c48c5d0, type: 3}
+      propertyPath: bumpClip
+      value: 
+      objectReference: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
     - target: {fileID: 3432079382574950826, guid: 827ffd0237c95114b87e7e8a2c48c5d0, type: 3}
       propertyPath: m_LocalPosition.x
       value: 5.33042
@@ -50,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3797837209795153878, guid: 827ffd0237c95114b87e7e8a2c48c5d0, type: 3}
       propertyPath: m_Name
-      value: BumpableUpgrader Variant
+      value: BumpableUpgraderLightRadius Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

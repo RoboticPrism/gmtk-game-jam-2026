@@ -54,7 +54,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8581308063117773960, guid: aaba4d868aea58548913bae1e948cf64, type: 3}
       propertyPath: m_Name
-      value: BumpableUpgrader Variant
+      value: BumpableUpgraderResourceGain Variant
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
