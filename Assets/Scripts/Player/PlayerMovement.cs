@@ -33,6 +33,16 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 visualTargetLocation;
 
+    [SerializeField]
+    [Tooltip("How long teleport has to be held to teleport")]
+    private float teleportSeconds;
+
+    [SerializeField]
+    public float currentTeleportChannel = 0;
+
+    [SerializeField]
+    private bool isHoldingTeleport = false;
+
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
     {
@@ -40,6 +50,8 @@ public class PlayerMovement : MonoBehaviour
 
         controls.Player.Move.performed += ctx => moveInput = ctx.ReadValue<Vector2>();
         controls.Player.Move.canceled += ctx => moveInput = Vector2.zero;
+        controls.Player.Jump.started += ctx => isHoldingTeleport = true;
+        controls.Player.Jump.canceled += ctx => isHoldingTeleport = false;
 
         controls.Enable();
 
@@ -54,6 +66,7 @@ public class PlayerMovement : MonoBehaviour
 
         // Check Inputs
         CheckMove();
+        CheckTeleport();
     }
 
 
@@ -106,6 +119,56 @@ public class PlayerMovement : MonoBehaviour
                 EnemyManager.singleton.DoEnemyTurns();
             }
         }
+    }
+
+    private void CheckTeleport()
+    {
+        if(isHoldingTeleport)
+        {
+            currentTeleportChannel += Time.deltaTime;
+            if(currentTeleportChannel > teleportSeconds)
+            {
+                StartCoroutine(TeleportAnimation());
+                currentTeleportChannel = teleportSeconds-0.01f;
+                isHoldingTeleport = false;
+            }
+        }
+        else
+        {
+            if (currentTeleportChannel > 0)
+            {
+                currentTeleportChannel -= Time.deltaTime;
+                if(currentTeleportChannel < 0)
+                {
+                    currentTeleportChannel = 0;
+                }
+            }
+        }
+    }
+
+    IEnumerator TeleportAnimation()
+    {
+        controls.Disable();
+
+        ScreenEffectManager.singleton.FadeOut();
+
+        Player.singleton.playerAnimator.HidePlayer();
+
+        yield return new WaitForSeconds(2f);
+
+        // Teleport to below the pyre
+        currentGridLocation = GridManager.singleton.resourceTilemap.WorldToCell(FindAnyObjectByType<Pyre>().transform.position + Vector3Int.down);
+        visualTargetLocation = currentGridLocation;
+
+        yield return new WaitForSeconds(1f);
+
+        ScreenEffectManager.singleton.FadeIn();
+
+        Player.singleton.playerAnimator.AnimateTeleport();
+
+        yield return new WaitForSeconds(2f);
+
+        controls.Enable();
     }
 
     private void UpdatePosition(Vector3Int targetPosition)
