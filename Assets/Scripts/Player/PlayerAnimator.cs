@@ -148,4 +148,34 @@ public class PlayerAnimator : MonoBehaviour
         }
         teleportAnimating = false;
     }
+
+    public void AnimateForcedTeleport()
+    {
+        StartCoroutine(ForcedTeleportAnimation());
+    }
+    IEnumerator ForcedTeleportAnimation() 
+    {
+        teleportAnimating = true;
+        teleportRenderer.sortingOrder = teleportSpriteLayer;
+
+        float currentTime = 0f;
+        while (currentTime < 2f)
+        {
+            currentTime += Time.deltaTime;
+            teleportRenderer.transform.localScale = Mathf.Lerp(0f, 2f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            yield return null;
+        }
+
+        teleportRenderer.sortingOrder = teleportSpriteAnimationLayer;
+        HidePlayer();
+        
+        currentTime = 0f;
+        while (currentTime < 2f)
+        {
+            currentTime += Time.deltaTime;
+            teleportRenderer.transform.localScale = Mathf.Lerp(2f, 0f, currentTime / 2f) * teleportAuraRadio * Vector3.one;
+            yield return null;
+        }
+        teleportAnimating = false;
+    }
 }

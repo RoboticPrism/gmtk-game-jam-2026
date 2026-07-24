@@ -171,6 +171,41 @@ public class PlayerMovement : MonoBehaviour
         controls.Enable();
     }
 
+    public void ForceTeleport()
+    {
+        StartCoroutine(ForcedTeleportAnimation());
+    }
+
+    IEnumerator ForcedTeleportAnimation()
+    {
+        controls.Disable();
+
+        Player.singleton.playerAnimator.AnimateForcedTeleport();
+
+        yield return new WaitForSeconds(2f);
+
+        ScreenEffectManager.singleton.FadeOut();
+
+        Player.singleton.playerAnimator.HidePlayer();
+
+        yield return new WaitForSeconds(2f);
+
+        // Teleport to below the pyre
+        currentGridLocation = GridManager.singleton.resourceTilemap.WorldToCell(FindAnyObjectByType<Pyre>().transform.position + Vector3Int.down);
+        visualTargetLocation = currentGridLocation;
+
+        yield return new WaitForSeconds(1f);
+
+        ScreenEffectManager.singleton.FadeIn();
+
+        Player.singleton.playerAnimator.AnimateTeleport();
+
+        yield return new WaitForSeconds(2f);
+
+        controls.Enable();
+    }
+
+
     private void UpdatePosition(Vector3Int targetPosition)
     {
         currentGridLocation = targetPosition;

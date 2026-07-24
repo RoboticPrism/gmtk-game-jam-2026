@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using UnityEngine;
 
 public class CounterManager : MonoBehaviour
@@ -11,6 +12,18 @@ public class CounterManager : MonoBehaviour
     [SerializeField]
     [Tooltip("How many steps the player starts with")]
     public int startingSteps;
+
+    public bool isCounting = false;
+
+    [System.Serializable]
+    class TutorialAtCount
+    {
+        public GameObject tutorial;
+        public int displayAtStepCount;
+    }
+
+    [SerializeField]
+    List<TutorialAtCount> tutorials;
 
     public void Awake()
     {
@@ -26,14 +39,33 @@ public class CounterManager : MonoBehaviour
 
     public void StartCounting()
     {
+        isCounting = true;
         steps = startingSteps;
     }
 
     public void UseStep()
     {
-        if (!TowerDefenseManager.singleton.isTowerDefenseMode)
+        if (!TowerDefenseManager.singleton.isTowerDefenseMode && isCounting)
         {
             steps--;
+
+            // Play any relevant tutorials
+            TutorialAtCount currentTutorial = null;
+            foreach(TutorialAtCount tutorialAtCount in tutorials)
+            {
+                if(tutorialAtCount.displayAtStepCount == steps)
+                {
+                    currentTutorial = tutorialAtCount;
+                }
+            }
+
+            if (currentTutorial != null)
+            {
+                currentTutorial.tutorial.SetActive(true);
+                tutorials.Remove(currentTutorial);
+            }
+
+            // Check if its tower defense mode
             if (steps <= 0)
             {
                 TowerDefenseManager.singleton.BeginTowerDefenseMode();

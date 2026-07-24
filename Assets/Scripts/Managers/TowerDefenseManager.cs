@@ -65,6 +65,14 @@ public class TowerDefenseManager : MonoBehaviour
     {
         isTowerDefenseMode = true;
 
+        // If player is far from the pyre, force a teleport
+        if(Vector3.Distance(Player.singleton.transform.position, Pyre.singleton.transform.position) > 10f)
+        {
+            Player.singleton.playerMovement.ForceTeleport();
+        }
+
+        GridManager.singleton.StartTowerDefense();
+
         // Save and update the pyre's old light radius
         previousPyreLightRadius = Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius;
         Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = defenseModePyreLightRadius;
@@ -82,6 +90,8 @@ public class TowerDefenseManager : MonoBehaviour
     public void EndTowerDefenseMode()
     {
         isTowerDefenseMode = false;
+
+        GridManager.singleton.EndTowerDefense();
 
         // Restore pyre light radius
         Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = previousPyreLightRadius;
@@ -155,6 +165,9 @@ public class TowerDefenseManager : MonoBehaviour
     private Coroutine gameoverCoroutine;
     IEnumerator GameoverAnimation()
     {
+        // Turn off the forced lighting to play our own lightin animation
+        GridManager.singleton.EndTowerDefense();
+
         FogOfWarLight pyreLight = Pyre.singleton.GetComponent<FogOfWarLight>();
         while (pyreLight.lightRadius > 0)
         {
