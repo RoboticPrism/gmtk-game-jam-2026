@@ -346,7 +346,7 @@ MonoBehaviour:
   left: {fileID: 21300000, guid: 89b9bb808e2ecf641ac1ebf8fd42562b, type: 3}
   spriteRenderer: {fileID: 6089038807575220837}
   teleportRenderer: {fileID: 5049978648729472446}
-  teleportAuraRadio: 2
+  teleportAuraRadio: 4
   teleportSpriteLayer: 2
   teleportSpriteAnimationLayer: 4
   returnToIdleSeconds: 0.6

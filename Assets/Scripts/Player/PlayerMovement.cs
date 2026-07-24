@@ -110,13 +110,13 @@ public class PlayerMovement : MonoBehaviour
             {
                 UpdatePosition(targetLocation);
                 DoMoveCooldown();
-                EnemyManager.singleton.DoEnemyTurns();
+                TurnManager.singleton.DoTurn();
                 Player.singleton.playerAnimator.SetMoveDirection(moveDirection);
             }
             else if (GridManager.singleton.GetBumpableAtGridPoint(targetLocation) != null)
             {
                 BumpBumpableAtLocation(targetLocation);
-                EnemyManager.singleton.DoEnemyTurns();
+                TurnManager.singleton.DoTurn();
             }
         }
     }

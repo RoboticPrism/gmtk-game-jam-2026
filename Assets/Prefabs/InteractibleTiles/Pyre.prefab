@@ -624,17 +624,21 @@ MonoBehaviour:
   bumpClip: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
   refuelCost: 20
   refuelSteps: 50
+  health: 50
   counterText: {fileID: 5022982068444560569}
   spriteRenderer: {fileID: 746945853915866956}
   highFireCount: {fileID: 21300000, guid: a3750ca17e7635a488266c202b5a5721, type: 3}
   highFireCountCombat: {fileID: 21300000, guid: c035d4513a870a243926f5713c7fa907, type: 3}
   highFireThreshold: 100
+  highHealthThreshold: 30
   mediumFireCount: {fileID: 21300000, guid: 0eaf837225ca85d48a87388491fdaeac, type: 3}
   mediumFireCountCombat: {fileID: 21300000, guid: dadc391d0a391464aaf84d4c5b5d2991, type: 3}
   mediumFireThreshold: 50
+  mediumHealthThreshold: 10
   lowFireCount: {fileID: 21300000, guid: c943b00183ef3d94cb6112ee37c687f0, type: 3}
   lowFireCountCombat: {fileID: 21300000, guid: da16ab0597884c646aa6b8ead905302d, type: 3}
   lowFireThreshold: 25
+  lowHealthThreshold: 0
   title: {fileID: 8745149704532665658}
   titleHoldSeconds: 5
   fadeInSeconds: 1

@@ -32,6 +32,8 @@ public class CounterUI : MonoBehaviour
     [SerializeField]
     private GameObject container;
 
+    private bool isTutorialized = false;
+
     public void Start()
     {
         container.SetActive(false);
@@ -45,21 +47,30 @@ public class CounterUI : MonoBehaviour
 
     private void UpdateCount()
     {
-        // Update text
-        counterText.text = CounterManager.singleton.steps.ToString();
-
-        // Step the background based on how many steps are left
-        if(CounterManager.singleton.steps >= highFireThreshold)
+        if (TowerDefenseManager.singleton.isTowerDefenseMode)
         {
-            backgroundImage.sprite = highFireCount;
-        }
-        else if (CounterManager.singleton.steps >= mediumFireThreshold)
-        {
-            backgroundImage.sprite = mediumFireCount;
+            container.SetActive(false);
         }
         else
         {
-            backgroundImage.sprite = lowFireCount;
+            container.SetActive(isTutorialized);
+
+            // Update text
+            counterText.text = CounterManager.singleton.steps.ToString();
+
+            // Step the background based on how many steps are left
+            if (CounterManager.singleton.steps >= highFireThreshold)
+            {
+                backgroundImage.sprite = highFireCount;
+            }
+            else if (CounterManager.singleton.steps >= mediumFireThreshold)
+            {
+                backgroundImage.sprite = mediumFireCount;
+            }
+            else
+            {
+                backgroundImage.sprite = lowFireCount;
+            }
         }
     }
 
@@ -73,6 +84,7 @@ public class CounterUI : MonoBehaviour
         // Start over pyre
         transform.position = Camera.main.WorldToScreenPoint(pyre.transform.position + new Vector3(-0.5f,-0.5f,0));
         container.gameObject.SetActive(true);
+        isTutorialized = true;
 
         yield return new WaitForSeconds(1f);
 

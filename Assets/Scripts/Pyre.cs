@@ -4,6 +4,7 @@ using System.Collections;
 
 public class Pyre : BumpableTile
 {
+    public static Pyre singleton;
 
     [SerializeField]
     [Tooltip("How much wood it costs to refueld the fire")]
@@ -12,6 +13,10 @@ public class Pyre : BumpableTile
     [SerializeField]
     [Tooltip("How many steps you get back from refueling")]
     private int refuelSteps;
+
+    [SerializeField]
+    [Tooltip("How much health the pyre starts with")]
+    public int health;
 
     [SerializeField]
     private TextMeshPro counterText;
@@ -29,6 +34,9 @@ public class Pyre : BumpableTile
     private int highFireThreshold;
 
     [SerializeField]
+    private int highHealthThreshold;
+
+    [SerializeField]
     private Sprite mediumFireCount;
 
     [SerializeField]
@@ -38,6 +46,9 @@ public class Pyre : BumpableTile
     private int mediumFireThreshold;
 
     [SerializeField]
+    private int mediumHealthThreshold;
+
+    [SerializeField]
     private Sprite lowFireCount;
 
     [SerializeField]
@@ -45,6 +56,9 @@ public class Pyre : BumpableTile
 
     [SerializeField]
     private int lowFireThreshold;
+
+    [SerializeField]
+    private int lowHealthThreshold;
 
     [SerializeField]
     private TextMeshPro title;
@@ -68,6 +82,19 @@ public class Pyre : BumpableTile
     private TextMeshPro subtext2;
 
     private bool hasAnimated = false;
+    private bool hasFinishedAnimation = false;
+
+    public void Awake()
+    {
+        if(singleton)
+        {
+            Debug.LogError("A pyre already exists!");
+        }
+        else
+        {
+            singleton = this;
+        }
+    }
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     public override void Start()
@@ -79,20 +106,42 @@ public class Pyre : BumpableTile
     // Update is called once per frame
     void Update()
     {
-        counterText.text = CounterManager.singleton.steps.ToString();
+            // Step the background based on how many health is left
+        if (TowerDefenseManager.singleton.isTowerDefenseMode)
+        {
+            counterText.gameObject.SetActive(false);
 
-        // Step the background based on how many steps are left
-        if(CounterManager.singleton.steps >= highFireThreshold)
-        {
-            spriteRenderer.sprite = highFireCount;
-        }
-        else if (CounterManager.singleton.steps >= mediumFireThreshold)
-        {
-            spriteRenderer.sprite = mediumFireCount;
+            if (CounterManager.singleton.steps >= highHealthThreshold)
+            {
+                spriteRenderer.sprite = highFireCountCombat;
+            }
+            else if (CounterManager.singleton.steps >= mediumHealthThreshold)
+            {
+                spriteRenderer.sprite = mediumFireCountCombat;
+            }
+            else
+            {
+                spriteRenderer.sprite = lowFireCountCombat;
+            }
         }
         else
         {
-            spriteRenderer.sprite = lowFireCount;
+            // Step the background based on how many steps are left
+            if (CounterManager.singleton.steps >= highFireThreshold)
+            {
+                spriteRenderer.sprite = highFireCount;
+            }
+            else if (CounterManager.singleton.steps >= mediumFireThreshold)
+            {
+                spriteRenderer.sprite = mediumFireCount;
+            }
+            else
+            {
+                spriteRenderer.sprite = lowFireCount;
+            }
+
+            counterText.gameObject.SetActive(hasFinishedAnimation);
+            counterText.text = CounterManager.singleton.steps.ToString();
         }
 
         // Check when to play intro animation
@@ -151,6 +200,7 @@ public class Pyre : BumpableTile
 
         // Actually start counting steps
         CounterManager.singleton.StartCounting();
+        hasFinishedAnimation = true;
 
         yield return new WaitForSeconds(1f);
 
