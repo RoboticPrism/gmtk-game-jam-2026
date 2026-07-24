@@ -24,6 +24,8 @@ public class TowerDefenseGremlin : EnemyBase
 
     private List<PyreAttackPoint> attackPoints;
 
+    private bool atPyre = false;
+
     public override void Start()
     {
         base.Start();
@@ -43,32 +45,44 @@ public class TowerDefenseGremlin : EnemyBase
 
         // Find the nearest corner of the pyre to go chew on
         List<Vector3Int> pathToPyre = null;
-        foreach (PyreAttackPoint attackPoint in attackPoints)
-        {
-            List<Vector3Int> potetentialpathToPyre = GridManager.singleton.FindPath(gridLocation, attackPoint.gridLocation); 
-            if(pathToPyre == null)
-            {
-                pathToPyre = potetentialpathToPyre;
-            }
-            else if(pathToPyre != null && potetentialpathToPyre != null && potetentialpathToPyre.Count < pathToPyre.Count)
-            {
-                pathToPyre = potetentialpathToPyre;
-            }
-        }
+        PyreAttackPoint nearestAttackPoint = null;
 
-        // If the next path to the pyre IS the pyre, attack
-        if(pathToPyre != null && pathToPyre.Count == 1)
+        if (!atPyre)
+        {
+            foreach (PyreAttackPoint attackPoint in attackPoints)
+            {
+                List<Vector3Int> potetentialpathToPyre = GridManager.singleton.FindPath(gridLocation, attackPoint.gridLocation);
+                if (pathToPyre == null)
+                {
+                    pathToPyre = potetentialpathToPyre;
+                    nearestAttackPoint = attackPoint;
+                }
+                else if (pathToPyre != null && potetentialpathToPyre != null && potetentialpathToPyre.Count < pathToPyre.Count)
+                {
+                    pathToPyre = potetentialpathToPyre;
+                    nearestAttackPoint = attackPoint;
+                }
+            }
+
+            // If the next path to the pyre IS the pyre, attack
+            if (pathToPyre != null && nearestAttackPoint != null && pathToPyre.Count == 1)
+            {
+                MoveToLocation(nearestAttackPoint.gridLocation);
+                atPyre = true;
+                gremlinState = GremlinState.ATTACK;
+            }
+            // If the pyre is in range, and has a path to it
+            else if (pathToPyre != null)
+            {
+                gremlinState = GremlinState.CHASE;
+            }
+            else
+            {
+                gremlinState = GremlinState.WANDER;
+            }
+        } else
         {
             gremlinState = GremlinState.ATTACK;
-        }
-        // If the pyre is in range, and has a path to it
-        else if(pathToPyre != null)
-        {
-            gremlinState = GremlinState.CHASE;
-        }
-        else
-        {
-            gremlinState = GremlinState.WANDER;
         }
 
 
