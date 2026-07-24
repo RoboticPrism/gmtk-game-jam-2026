@@ -2,6 +2,7 @@ using UnityEngine;
 using System.Collections;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.Events;
 
 public class Tutorial : MonoBehaviour
 {
@@ -9,6 +10,9 @@ public class Tutorial : MonoBehaviour
 
     [SerializeField]
     private TutorialMode tutorialMode;
+
+    [SerializeField]
+    private float timeBasedDuractionSeconds;
 
     [SerializeField]
     private float fadeAwaySeconds;
@@ -24,6 +28,9 @@ public class Tutorial : MonoBehaviour
     [SerializeField]
     [Tooltip("If set to distance, how close the player needs to be to clear it.")]
     private float distance;
+
+    [SerializeField]
+    public UnityEvent OnTutorialCloseEvent;
 
     // Start is called once before the first execution of Update after the MonoBehaviour is created
     void Start()
@@ -41,6 +48,11 @@ public class Tutorial : MonoBehaviour
         switch(tutorialMode)
         {
             case TutorialMode.TIMEBASED_UPON_VIEW:
+                timeBasedDuractionSeconds -= Time.deltaTime;
+                if(timeBasedDuractionSeconds<=0)
+                {
+                    ClearTutorial();
+                }
                 break;
             case TutorialMode.PLAYER_DISTANCE:
                 if(Vector3.Distance(Player.singleton.transform.position, transform.position) <= distance)
@@ -71,6 +83,7 @@ public class Tutorial : MonoBehaviour
             tutorialText.color = new Color(color.r, color.g, color.b, alpha);
             yield return null;
         }
+        OnTutorialCloseEvent?.Invoke();
         Destroy(gameObject);
     }
 

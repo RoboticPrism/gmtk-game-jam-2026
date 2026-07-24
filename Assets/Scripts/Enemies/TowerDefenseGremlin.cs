@@ -50,7 +50,7 @@ public class TowerDefenseGremlin : EnemyBase
             {
                 pathToPyre = potetentialpathToPyre;
             }
-            else if(pathToPyre != null && potetentialpathToPyre.Count < pathToPyre.Count)
+            else if(pathToPyre != null && potetentialpathToPyre != null && potetentialpathToPyre.Count < pathToPyre.Count)
             {
                 pathToPyre = potetentialpathToPyre;
             }

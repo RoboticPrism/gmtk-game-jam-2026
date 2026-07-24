@@ -11,6 +11,10 @@ public class GridManager : MonoBehaviour
     public Tilemap fogOfWarTilemap;
 
     [SerializeField]
+    [Tooltip("The fog of war for tower defense mode")]
+    public Tilemap towerDefenseFogOfWar;
+
+    [SerializeField]
     [Tooltip("The tilemap resources sit on")]
     public Tilemap resourceTilemap;
 
@@ -37,6 +41,17 @@ public class GridManager : MonoBehaviour
         fogOfWarTilemap.gameObject.SetActive(true);
     }
 
+    public void StartTowerDefense()
+    {
+        towerDefenseFogOfWar.gameObject.SetActive(true);
+        fogOfWarTilemap.gameObject.SetActive(false);
+    }
+
+    public void EndTowerDefense()
+    {
+        towerDefenseFogOfWar.gameObject.SetActive(false);
+        fogOfWarTilemap.gameObject.SetActive(true);
+    }
 
     public bool CheckCollisionAtWorldPoint(Vector3 worldPoint)
     {
