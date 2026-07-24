@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &3797837209795153878
+--- !u!1 &1215618422039000029
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,53 +8,74 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3432079382574950826}
-  - component: {fileID: 2770274121866830277}
-  - component: {fileID: -3096528208504519428}
+  - component: {fileID: 1488167097930072832}
+  - component: {fileID: 2577264004196010122}
+  - component: {fileID: 5546095637492648347}
+  - component: {fileID: 210877668312782964}
   m_Layer: 0
-  m_Name: BumpableUpgrader
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3432079382574950826
+--- !u!4 &1488167097930072832
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797837209795153878}
+  m_GameObject: {fileID: 1215618422039000029}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 4.54, y: -4.3, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &2770274121866830277
+--- !u!114 &2577264004196010122
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797837209795153878}
+  m_GameObject: {fileID: 1215618422039000029}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6c89686e87261554dabeeae287624672, type: 3}
+  m_Script: {fileID: 11500000, guid: 70f8f24524a10d446b8e586cceca7c1f, type: 3}
   m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::BumpableUpgrader
+  m_EditorClassIdentifier: Assembly-CSharp::Turret
   bumpClip: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
-  upgradeType: 0
+  damage: 1
+  cooldownBetweenShots: 5
+  maxAmmo: 5
+  currentAmmo: 0
+  turretProjectilePrefab: {fileID: 8632885612821742494, guid: 7a404ad4fc1b10a42bb2f20e3d2d4d18, type: 3}
+  upgradeCost:
+    level: 0
+    subcosts: []
   upgradeCostUIPrefab: {fileID: 3225901675009251778, guid: a4c0a3af978d3e548ae7c701339d38f3, type: 3}
---- !u!82 &-3096528208504519428
+--- !u!114 &5546095637492648347
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1215618422039000029}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4bbaf6e60f5c484d8eab3dbf6c09a49, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::FogOfWarLight
+  lightRadius: 2
+--- !u!82 &210877668312782964
 AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3797837209795153878}
+  m_GameObject: {fileID: 1215618422039000029}
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}

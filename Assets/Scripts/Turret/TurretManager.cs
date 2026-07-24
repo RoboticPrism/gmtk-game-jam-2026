@@ -11,6 +11,8 @@ public class TurretManager : MonoBehaviour
 
     public Turret turretPrefab;
 
+    public List<Turret> turretInstances;
+
     public void Awake()
     {
         if(singleton)
@@ -27,8 +29,25 @@ public class TurretManager : MonoBehaviour
     public void AssembleTurret()
     {
         if (availableTurrets.Count > 0) {
-            Instantiate(turretPrefab, availableTurrets[0].transform.position, Quaternion.identity);
+            turretInstances.Add(Instantiate(turretPrefab, availableTurrets[0].transform.position, Quaternion.identity));
             availableTurrets.RemoveAt(0);
+        }
+    }
+
+
+    public void AddTurret(Turret turret)
+    {
+        turretInstances.Add(turret);
+    }
+    
+    public void DoTurn()
+    {
+        if (TowerDefenseManager.singleton.isTowerDefenseMode)
+        {
+            foreach (Turret turret in turretInstances)
+            {
+                turret.DoTurn();
+            }
         }
     }
 }

@@ -31,7 +31,14 @@ public class CounterManager : MonoBehaviour
 
     public void UseStep()
     {
-        steps--;
+        if (!TowerDefenseManager.singleton.isTowerDefenseMode)
+        {
+            steps--;
+            if (steps <= 0)
+            {
+                TowerDefenseManager.singleton.BeginTowerDefenseMode();
+            }
+        }
     }
 
     public void AddSteps(int amount = 1)

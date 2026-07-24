@@ -21,11 +21,11 @@ public class UpgradeCostUI : MonoBehaviour
 
     private List<UpgradeCostLineItemUI> upgradeCostLineItemUIInstances = new List<UpgradeCostLineItemUI>();
 
-    public void Setup(string upgradeName, int upgradeLevel, PlayerUpgrades.UpgradeCost cost)
+    public void Setup(string title, Cost cost)
     {
-        productText.text = upgradeName + " Lvl. " + upgradeLevel;
+        productText.text = title;
         float yOffset = yOffsetStart;
-        foreach(PlayerUpgrades.UpgradeSubcost subcost in cost.subcosts)
+        foreach(Subcost subcost in cost.subcosts)
         {
             UpgradeCostLineItemUI newLineItem = Instantiate(upgradeCostLineItemUIPrefab, lineItemArea);
             newLineItem.transform.localPosition += Vector3.down * yOffset;

@@ -15,7 +15,7 @@ public class UpgradeCostLineItemUI : MonoBehaviour
     [SerializeField]
     private Color badColor;
 
-    public void Setup(PlayerUpgrades.UpgradeSubcost subcost)
+    public void Setup(Subcost subcost)
     {
         resourceType = subcost.resourceType;
         cost = subcost.amount;
