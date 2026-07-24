@@ -24,7 +24,7 @@ public class TurretBase : BumpableTile
     private void CreateUI()
     {
         upgradeCostUIInstance = Instantiate(upgradeCostUIPrefab, transform.position, Quaternion.identity);
-        upgradeCostUIInstance.Setup("Tower Lvl. 1", cost);
+        upgradeCostUIInstance.Setup("Tower\nLvl. 1", cost);
     }
 
     // Update is called once per frame

@@ -25,7 +25,7 @@ public class BumpableUpgrader : BumpableTile
         Cost upgradeCost = Player.singleton.playerUpgrades.GetCostForNextLevelForUpgradeType(upgradeType);
 
         upgradeCostUIInstance = Instantiate(upgradeCostUIPrefab, transform.position, Quaternion.identity);
-        upgradeCostUIInstance.Setup(upgradeName + " Lvl. " + upgradeLevel, upgradeCost);
+        upgradeCostUIInstance.Setup(upgradeName + "\nLvl. " + upgradeLevel, upgradeCost);
     }
 
     // Update is called once per frame
