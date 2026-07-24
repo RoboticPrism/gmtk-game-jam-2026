@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: def81f45e9c06bf429685b1bb762dbcf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GremlinEnemy
-  bumpClip: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
+  bumpClip: {fileID: 8300000, guid: 586cc7bf8194ca64ab12bb6ae2abdb3a, type: 3}
   gridLocation: {x: 0, y: 0, z: 0}
   visualTargetLocation: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 8446443596323264513}

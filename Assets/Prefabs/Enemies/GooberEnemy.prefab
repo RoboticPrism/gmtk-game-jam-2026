@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d5964a2c105fd6c44991184e22fd3c77, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GooberEnemy
-  bumpClip: {fileID: 8300000, guid: 528d4f82ce8fcb94b805fb3d9f359f4e, type: 3}
+  bumpClip: {fileID: 8300000, guid: 8b95135239dea6f40ada7b6c6fde9304, type: 3}
   gridLocation: {x: 0, y: 0, z: 0}
   visualTargetLocation: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 544429108381008085}
