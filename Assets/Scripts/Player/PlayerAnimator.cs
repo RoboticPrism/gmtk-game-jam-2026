@@ -24,6 +24,9 @@ public class PlayerAnimator : MonoBehaviour
     private SpriteRenderer teleportRenderer;
 
     [SerializeField]
+    private GameObject slashObject;
+
+    [SerializeField]
     private float teleportAuraRadio;
 
     private bool teleportAnimating = false;
@@ -111,6 +114,31 @@ public class PlayerAnimator : MonoBehaviour
     public void ShowPlayer()
     {
         spriteRenderer.gameObject.SetActive(true);
+    }
+
+    public void ShowSlash(MoveDirection moveDirection)
+    {
+        slashObject.SetActive(true);
+        switch(moveDirection)
+        {
+            case MoveDirection.UP:
+                slashObject.transform.rotation = Quaternion.Euler(0, 0, 180);
+                break;
+            case MoveDirection.DOWN:
+                slashObject.transform.rotation = Quaternion.Euler(0, 0, 0);
+                break;
+            case MoveDirection.LEFT:
+                slashObject.transform.rotation = Quaternion.Euler(0, 0, 270);
+                break;
+            case MoveDirection.RIGHT:
+                slashObject.transform.rotation = Quaternion.Euler(0, 0, 90);
+                break;
+        }
+    }
+
+    public void HideSlash()
+    {
+        slashObject.SetActive(false);
     }
 
     public void SetTeleportSize()

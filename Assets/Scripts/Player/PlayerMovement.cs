@@ -115,7 +115,7 @@ public class PlayerMovement : MonoBehaviour
             }
             else if (GridManager.singleton.GetBumpableAtGridPoint(targetLocation) != null)
             {
-                BumpBumpableAtLocation(targetLocation);
+                BumpBumpableAtLocation(targetLocation, moveDirection);
                 TurnManager.singleton.DoTurn();
             }
         }
@@ -226,26 +226,38 @@ public class PlayerMovement : MonoBehaviour
         isMoveOnCooldown = false;
     }
 
-    private void BumpBumpableAtLocation(Vector3Int location)
+    private void BumpBumpableAtLocation(Vector3Int location, MoveDirection moveDirection)
     {
-        GridManager.singleton.GetBumpableAtGridPoint(location).OnBump();
-        DoBumpCooldown(location);
+        BumpableTile bumpable = GridManager.singleton.GetBumpableAtGridPoint(location);
+        // Only slash at breakable resources and enemies
+        bool showSlash = bumpable.GetComponent<EnemyBase>() != null || bumpable.GetComponent<BumpableResource>() != null;
+        bumpable.OnBump();
+        DoBumpCooldown(location, moveDirection, showSlash);
         CounterManager.singleton.UseStep();
     }
 
     private Coroutine bumpCoroutine;
-    private void DoBumpCooldown(Vector3Int location)
+    private void DoBumpCooldown(Vector3Int location, MoveDirection moveDirection, bool showSlash)
     {
         isMoveOnCooldown = true;
-        bumpCoroutine = StartCoroutine(Bump(location));
+        bumpCoroutine = StartCoroutine(Bump(location, moveDirection, showSlash));
     }
 
-    IEnumerator Bump(Vector3Int location)
+    IEnumerator Bump(Vector3Int location, MoveDirection moveDirection, bool showSlash)
     {
-        visualTargetLocation = Vector3.Lerp(location, currentGridLocation, 0.5f);
-        yield return new WaitForSeconds(bumpCooldownSeconds/2f);
+        visualTargetLocation = Vector3.Lerp(location, currentGridLocation, 0.25f);
+        yield return new WaitForSeconds(bumpCooldownSeconds/4f);
+        if (showSlash) { 
+            Player.singleton.playerAnimator.ShowSlash(moveDirection);
+        }
+        yield return new WaitForSeconds(bumpCooldownSeconds/4f);
         visualTargetLocation = currentGridLocation;
-        yield return new WaitForSeconds(bumpCooldownSeconds/2f);
+        yield return new WaitForSeconds(bumpCooldownSeconds/4f);
+        if (showSlash)
+        {
+            Player.singleton.playerAnimator.HideSlash();
+        }
+        yield return new WaitForSeconds(bumpCooldownSeconds/4f);
         isMoveOnCooldown = false;
     }
 }
