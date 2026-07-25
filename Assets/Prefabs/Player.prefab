@@ -1290,11 +1290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33167f61d102d924198e79c8734dc0ed, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  resourceInventorySlots:
-  - resourceType: 0
-    amount: 200
-  - resourceType: 1
-    amount: 20
+  resourceInventorySlots: []
   resourceSpendPrefab: {fileID: 946341938395503925, guid: cc7cda69fa1ba7e4da1d93f191563a5f, type: 3}
   resourceSpendDelaySeconds: 0.1
   pickupClip: {fileID: 8300000, guid: ff7a8b0eb2f0a7c48b372c6816a0cc05, type: 3}
