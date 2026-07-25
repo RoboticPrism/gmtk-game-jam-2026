@@ -58,4 +58,12 @@ public class TurretManager : MonoBehaviour
             turret.Reload();
         }
     }
+
+    public void RemoveAllTurretLights()
+    {
+        foreach(Turret turret in turretInstances)
+        {
+            Destroy(turret.GetComponent<FogOfWarLight>());
+        }
+    }
 }

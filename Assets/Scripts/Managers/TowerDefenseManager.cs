@@ -192,6 +192,8 @@ public class TowerDefenseManager : MonoBehaviour
 
         BackgroundMusicManager.singleton.LoseEffect();
 
+        TurretManager.singleton.RemoveAllTurretLights();
+
         FogOfWarLight pyreLight = Pyre.singleton.GetComponent<FogOfWarLight>();
         while (pyreLight.lightRadius > 0)
         {

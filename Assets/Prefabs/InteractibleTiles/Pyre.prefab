@@ -640,6 +640,7 @@ MonoBehaviour:
   lowFireCountCombat: {fileID: 21300000, guid: da16ab0597884c646aa6b8ead905302d, type: 3}
   lowFireThreshold: 25
   lowHealthThreshold: 0
+  noHealthFire: {fileID: 21300000, guid: a88d4d96c77d5114a8a58847a4e1887b, type: 3}
   title: {fileID: 8745149704532665658}
   titleHoldSeconds: 5
   fadeInSeconds: 1
