@@ -72,7 +72,7 @@ public class ScreenEffectManager : MonoBehaviour
         while (currentTime < fadeSeconds)
         {
             currentTime += Time.deltaTime;
-            float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeSeconds);
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeSeconds);
             fade.color = new Color(color.r, color.g, color.b, alpha);
             yield return null;
         }
