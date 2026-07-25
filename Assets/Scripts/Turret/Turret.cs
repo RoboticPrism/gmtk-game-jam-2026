@@ -168,7 +168,7 @@ public class Turret : BumpableTile
         } 
         else
         {
-            if (currentTurretLevel.nextLevelCost.canPlayerAfford())
+            if (currentLevel < 3 && currentTurretLevel.nextLevelCost.canPlayerAfford())
             {
                 currentTurretLevel.nextLevelCost.payCost();
                 currentLevel++;
