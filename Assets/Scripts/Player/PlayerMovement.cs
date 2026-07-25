@@ -206,7 +206,7 @@ public class PlayerMovement : MonoBehaviour
     }
 
 
-    private void UpdatePosition(Vector3Int targetPosition)
+    public void UpdatePosition(Vector3Int targetPosition)
     {
         currentGridLocation = targetPosition;
         visualTargetLocation = targetPosition;
@@ -258,6 +258,24 @@ public class PlayerMovement : MonoBehaviour
             Player.singleton.playerAnimator.HideSlash();
         }
         yield return new WaitForSeconds(bumpCooldownSeconds/4f);
+        isMoveOnCooldown = false;
+    }
+
+    public void UseTeleporter(BumpableTeleporter teleporter)
+    {
+        UpdatePosition(teleporter.otherTeleporter.gridLocation);
+        StartCoroutine(UseTeleporterAnimation()); 
+    }
+
+    IEnumerator UseTeleporterAnimation()
+    {
+        isMoveOnCooldown = true;
+        Player.singleton.playerAnimator.HidePlayer();
+        while(Vector3.Distance(transform.position, visualTargetLocation) > 0.1f)
+        {
+            yield return null;
+        }
+        Player.singleton.playerAnimator.ShowPlayer();
         isMoveOnCooldown = false;
     }
 }
