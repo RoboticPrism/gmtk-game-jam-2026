@@ -60,7 +60,7 @@ public class GridManager : MonoBehaviour
 
     public bool CheckCollisionAtGridPoint(Vector3Int gridPoint)
     {
-        return resourceTilemap.GetTile(gridPoint) != null || EnemyManager.singleton.GetEnemyAtLocation(gridPoint) != null;
+        return resourceTilemap.GetTile(gridPoint) != null || EnemyManager.singleton.GetEnemyAtLocation(gridPoint) != null || Player.singleton.playerMovement.currentGridLocation == gridPoint;
     }
 
     public BumpableTile GetBumpableAtGridPoint(Vector3Int gridPoint)
@@ -181,6 +181,6 @@ public class GridManager : MonoBehaviour
     // Check if the tile contains an obstacle
     private bool IsWalkable(Vector3Int cellPos)
     {
-        return !resourceTilemap.HasTile(cellPos);
+        return !CheckCollisionAtGridPoint(cellPos);
     }
 }
