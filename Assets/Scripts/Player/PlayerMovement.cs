@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour
     void Update()
     {
         // Move towards target location
-        transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed);
+        transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed * Time.deltaTime);
 
         // Check Inputs
         CheckMove();
