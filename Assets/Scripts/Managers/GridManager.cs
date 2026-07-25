@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Tilemaps;
+using System.Linq;
 
 public class GridManager : MonoBehaviour
 {
@@ -25,6 +26,8 @@ public class GridManager : MonoBehaviour
     [SerializeField]
     [Tooltip("How many tiles to pathfind search before we give up")]
     private int maxSearchIterations = 500;
+    
+    private List<BumpableTeleporter> teleporters;
 
     public void Awake()
     {
@@ -39,6 +42,8 @@ public class GridManager : MonoBehaviour
 
         // So we don't have to keep hiding and unhiding this to do map edits
         fogOfWarTilemap.gameObject.SetActive(true);
+
+        teleporters = new List<BumpableTeleporter>(FindObjectsByType<BumpableTeleporter>());
     }
 
     public void StartTowerDefense()
@@ -55,12 +60,15 @@ public class GridManager : MonoBehaviour
 
     public bool CheckCollisionAtWorldPoint(Vector3 worldPoint)
     {
-        return resourceTilemap.GetTile(resourceTilemap.WorldToCell(worldPoint)) != null || EnemyManager.singleton.GetEnemyAtLocation(resourceTilemap.WorldToCell(worldPoint)) != null;
+        return CheckCollisionAtGridPoint(resourceTilemap.WorldToCell(worldPoint));
     }
 
     public bool CheckCollisionAtGridPoint(Vector3Int gridPoint)
     {
-        return resourceTilemap.GetTile(gridPoint) != null || EnemyManager.singleton.GetEnemyAtLocation(gridPoint) != null || Player.singleton.playerMovement.currentGridLocation == gridPoint;
+        return resourceTilemap.GetTile(gridPoint) != null || 
+            EnemyManager.singleton.GetEnemyAtLocation(gridPoint) != null || 
+            Player.singleton.playerMovement.currentGridLocation == gridPoint || 
+            teleporters.Any(teleporter => teleporter.gridLocation == gridPoint);
     }
 
     public BumpableTile GetBumpableAtGridPoint(Vector3Int gridPoint)
@@ -69,6 +77,16 @@ public class GridManager : MonoBehaviour
         if (bumpable == null)
         {
             bumpable = EnemyManager.singleton.GetEnemyAtLocation(gridPoint);
+        }
+        if(bumpable == null)
+        {
+            foreach(BumpableTeleporter teleporter in teleporters)
+            {
+                if(teleporter.gridLocation == gridPoint)
+                {
+                    bumpable = teleporter;
+                }
+            }
         }
         return bumpable;
     }
