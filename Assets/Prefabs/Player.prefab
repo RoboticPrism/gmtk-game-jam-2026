@@ -1251,16 +1251,20 @@ MonoBehaviour:
       subcosts:
       - resourceType: 0
         amount: 10
+      - resourceType: 2
+        amount: 5
     - level: 2
       subcosts:
-      - resourceType: 0
-        amount: 30
+      - resourceType: 2
+        amount: 10
+      - resourceType: 4
+        amount: 1
     - level: 3
       subcosts:
-      - resourceType: 0
-        amount: 30
       - resourceType: 2
-        amount: 30
+        amount: 10
+      - resourceType: 4
+        amount: 5
   - upgradeType: 1
     upgradeName: Resource Gain
     currentLevel: 0
@@ -1270,26 +1274,20 @@ MonoBehaviour:
       subcosts:
       - resourceType: 0
         amount: 10
-      - resourceType: 1
-        amount: 10
+      - resourceType: 2
+        amount: 5
     - level: 2
       subcosts:
-      - resourceType: 0
-        amount: 10
-      - resourceType: 1
-        amount: 10
-      - resourceType: 4
-        amount: 10
-    - level: 3
-      subcosts:
-      - resourceType: 0
-        amount: 10
-      - resourceType: 1
-        amount: 10
-      - resourceType: 4
+      - resourceType: 2
         amount: 10
       - resourceType: 3
         amount: 1
+    - level: 3
+      subcosts:
+      - resourceType: 2
+        amount: 10
+      - resourceType: 3
+        amount: 5
   - upgradeType: 2
     upgradeName: Attack Damage
     currentLevel: 0
@@ -1297,22 +1295,22 @@ MonoBehaviour:
     levelCosts:
     - level: 1
       subcosts:
-      - resourceType: 1
+      - resourceType: 0
         amount: 10
+      - resourceType: 2
+        amount: 5
     - level: 2
       subcosts:
-      - resourceType: 1
+      - resourceType: 2
         amount: 10
-      - resourceType: 4
-        amount: 10
+      - resourceType: 5
+        amount: 1
     - level: 3
       subcosts:
-      - resourceType: 1
+      - resourceType: 2
         amount: 10
-      - resourceType: 4
-        amount: 10
-      - resourceType: 3
-        amount: 1
+      - resourceType: 5
+        amount: 5
   playerDamage: 1
   damageIncreaseIncrement: 0.5
   lightRadiusIncreaseIncrement: 1
