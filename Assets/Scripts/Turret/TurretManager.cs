@@ -55,7 +55,7 @@ public class TurretManager : MonoBehaviour
     {
         foreach(Turret turret in turretInstances)
         {
-            turret.Reload();
+            turret.Reload(false);
         }
     }
 
