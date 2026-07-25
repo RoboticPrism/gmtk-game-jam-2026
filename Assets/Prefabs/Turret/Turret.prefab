@@ -88,6 +88,7 @@ MonoBehaviour:
   outOfAmmoAlert: {fileID: 7086414616570278209}
   buildClip: {fileID: 8300000, guid: df3c42be64ce8674ba52f28344d4f2ae, type: 3}
   outOfAmmoClip: {fileID: 8300000, guid: df3c42be64ce8674ba52f28344d4f2ae, type: 3}
+  reloadClip: {fileID: 8300000, guid: e2e429b802aab8749ac557ee19017003, type: 3}
 --- !u!114 &5546095637492648347
 MonoBehaviour:
   m_ObjectHideFlags: 0

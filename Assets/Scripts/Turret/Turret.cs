@@ -149,10 +149,13 @@ public class Turret : BumpableTile
         }
     }
 
-    public void Reload()
+    public void Reload(bool playClip = true)
     {
         currentAmmo = currentTurretLevel.maxAmmo;
-        audioSource.PlayOneShot(reloadClip);
+        if (playClip)
+        {
+            audioSource.PlayOneShot(reloadClip);
+        }
     }
 
     public override void OnBump()
