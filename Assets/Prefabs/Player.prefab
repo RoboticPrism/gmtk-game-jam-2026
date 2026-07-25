@@ -1661,7 +1661,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Player
   moveInput: {x: 0, y: 0}
-  moveSpeed: 0.05
+  moveSpeed: 10
   deadzone: 0.1
   moveCooldownSeconds: 0.2
   bumpCooldownSeconds: 0.5

@@ -64,7 +64,7 @@ public class EnemyBase : BumpableTile
 
     public virtual void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed);
+        transform.position = Vector3.Lerp(transform.position, visualTargetLocation, moveSpeed * Time.deltaTime);
     }
 
     protected void MoveToLocation(Vector3Int gridLocation)
