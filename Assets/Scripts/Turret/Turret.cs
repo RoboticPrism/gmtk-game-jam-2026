@@ -1,17 +1,13 @@
+using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Turret : BumpableTile 
 {
     [SerializeField]
     public float damage;
 
-    [SerializeField]
-    public int cooldownBetweenShots;
-
     private int currentCooldown = 0;
-
-    [SerializeField]
-    private int maxAmmo;
 
     [SerializeField]
     private int currentAmmo;
@@ -19,8 +15,28 @@ public class Turret : BumpableTile
     [SerializeField]
     private TurretProjectile turretProjectilePrefab;
 
+    [System.Serializable]
+    class TurretLevel
+    {
+        public int level;
+        public int maxAmmo;
+        public int cooldownBetweenShots;
+        public Cost nextLevelCost;
+        public Sprite baseSprite;
+        public Sprite outOfAmmoSprite;
+    }
+
     [SerializeField]
-    private Cost upgradeCost;
+    private List<TurretLevel> turretLevels;
+
+    [SerializeField]
+    private int currentLevel = 1;
+
+    private TurretLevel currentTurretLevel;
+
+
+    [SerializeField]
+    private SpriteRenderer spriteRenderer;
 
     [SerializeField]
     private UpgradeCostUI upgradeCostUIPrefab;
@@ -44,25 +60,44 @@ public class Turret : BumpableTile
     public override void Start()
     {
         base.Start();
-        currentCooldown = cooldownBetweenShots;
-        currentAmmo = maxAmmo;
-        CreateUI();
         if (buildClip)
         {
             audioSource.PlayOneShot(buildClip);
         }
+        currentTurretLevel = GetCurrentLevel();
+        CreateUI();
+        currentCooldown = currentTurretLevel.cooldownBetweenShots;
+        currentAmmo = currentTurretLevel.maxAmmo;
     }
 
     public void Update()
     {
         upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode);
         outOfAmmoAlert.SetActive(TowerDefenseManager.singleton.isTowerDefenseMode && currentAmmo <= 0);
+        SetSprite();
     }
 
     private void CreateUI()
     {
         upgradeCostUIInstance = Instantiate(upgradeCostUIPrefab, transform.position, Quaternion.identity);
-        upgradeCostUIInstance.Setup("Tower Lvl. 2", upgradeCost);
+        upgradeCostUIInstance.Setup("Tower\nLvl. "+(currentLevel+1), currentTurretLevel.nextLevelCost);
+    }
+
+    private void SetSprite()
+    {
+        if(currentAmmo > 0)
+        {
+            spriteRenderer.sprite = currentTurretLevel.baseSprite; 
+        }
+        else
+        {
+            spriteRenderer.sprite = currentTurretLevel.outOfAmmoSprite; 
+        }
+    }
+
+    private TurretLevel GetCurrentLevel()
+    {
+        return turretLevels.First(level => level.level == currentLevel);    
     }
 
     public void DoTurn()
@@ -73,7 +108,7 @@ public class Turret : BumpableTile
             if (currentAmmo > 0)
             {
                 ShootProjectile();
-                currentCooldown = cooldownBetweenShots;
+                currentCooldown = currentTurretLevel.cooldownBetweenShots;
                 currentAmmo--;
 
                 if(currentAmmo == 0)
@@ -114,11 +149,29 @@ public class Turret : BumpableTile
         // in tower defense mode, a bump reloads
         if(TowerDefenseManager.singleton.isTowerDefenseMode)
         {
-            currentAmmo = maxAmmo;
+            currentAmmo = currentTurretLevel.maxAmmo;
         } 
         else
         {
+            if (currentTurretLevel.nextLevelCost.canPlayerAfford())
+            {
+                currentTurretLevel.nextLevelCost.payCost();
+                currentLevel++;
+                currentTurretLevel = GetCurrentLevel();
+
+                audioSource.PlayOneShot(buildClip);
+
+                // Recreate cost ui for next level
+                Destroy(upgradeCostUIInstance.gameObject);
+
+                if(currentLevel < 3)
+                {
+                    CreateUI();
+                }
+            }
             //upgrade logic
         }
     }
+
+    
 }
