@@ -61,6 +61,9 @@ public class Pyre : BumpableTile
     private int lowHealthThreshold;
 
     [SerializeField]
+    private Sprite noHealthFire;
+
+    [SerializeField]
     private TextMeshPro title;
 
     [SerializeField]
@@ -111,13 +114,17 @@ public class Pyre : BumpableTile
         {
             counterText.gameObject.SetActive(false);
 
-            if (CounterManager.singleton.steps >= highHealthThreshold)
+            if (health >= highHealthThreshold)
             {
                 spriteRenderer.sprite = highFireCountCombat;
             }
-            else if (CounterManager.singleton.steps >= mediumHealthThreshold)
+            else if (health >= mediumHealthThreshold)
             {
                 spriteRenderer.sprite = mediumFireCountCombat;
+            }
+            else if (health <= 0)
+            {
+                spriteRenderer.sprite = noHealthFire;
             }
             else
             {
