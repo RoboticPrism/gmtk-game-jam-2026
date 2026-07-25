@@ -55,7 +55,7 @@ MonoBehaviour:
   turretProjectilePrefab: {fileID: 8632885612821742494, guid: 7a404ad4fc1b10a42bb2f20e3d2d4d18, type: 3}
   turretLevels:
   - level: 1
-    maxAmmo: 5
+    maxAmmo: 3
     cooldownBetweenShots: 10
     nextLevelCost:
       level: 2
@@ -69,7 +69,7 @@ MonoBehaviour:
     baseSprite: {fileID: 21300000, guid: 6fd1ef8c6e1e12b469f32ed9a28cc567, type: 3}
     outOfAmmoSprite: {fileID: 21300000, guid: 888d7fe65df70064f9253deb30c74865, type: 3}
   - level: 2
-    maxAmmo: 8
+    maxAmmo: 5
     cooldownBetweenShots: 7
     nextLevelCost:
       level: 3
@@ -97,6 +97,8 @@ MonoBehaviour:
   buildClip: {fileID: 8300000, guid: df3c42be64ce8674ba52f28344d4f2ae, type: 3}
   outOfAmmoClip: {fileID: 8300000, guid: df3c42be64ce8674ba52f28344d4f2ae, type: 3}
   reloadClip: {fileID: 8300000, guid: e2e429b802aab8749ac557ee19017003, type: 3}
+  shotOffsetRange: 2
+  ammoOffsetRange: 1
 --- !u!114 &5546095637492648347
 MonoBehaviour:
   m_ObjectHideFlags: 0

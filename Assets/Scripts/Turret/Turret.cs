@@ -55,6 +55,14 @@ public class Turret : BumpableTile
     [SerializeField]
     private AudioClip reloadClip;
 
+    [SerializeField]
+    [Tooltip("How many turns the shot cooldown can be off by, to prevent all turrets from firing in the same turn")]
+    private int shotOffsetRange;
+
+    [SerializeField]
+    [Tooltip("How many ammo shots turrets can be off by, to prevent all turrets from needing reloading in the same turn")]
+    private int ammoOffsetRange;
+
     public void Awake()
     {
         TurretManager.singleton.AddTurret(this);
@@ -69,8 +77,9 @@ public class Turret : BumpableTile
         }
         currentTurretLevel = GetCurrentLevel();
         CreateUI();
-        currentCooldown = currentTurretLevel.cooldownBetweenShots;
-        currentAmmo = currentTurretLevel.maxAmmo;
+        // Add some offset so they don't all fire on the same turn
+        currentCooldown = currentTurretLevel.cooldownBetweenShots + Random.Range(-shotOffsetRange,shotOffsetRange);
+        currentAmmo = currentTurretLevel.maxAmmo + Random.Range(-ammoOffsetRange, ammoOffsetRange);
     }
 
     public void Update()
@@ -151,7 +160,9 @@ public class Turret : BumpableTile
 
     public void Reload(bool playClip = true)
     {
-        currentAmmo = currentTurretLevel.maxAmmo;
+        // Add some slight variance so all the turrets don't run out on the same turn
+        currentAmmo = currentTurretLevel.maxAmmo + Random.Range(-ammoOffsetRange, ammoOffsetRange);
+
         if (playClip)
         {
             audioSource.PlayOneShot(reloadClip);
