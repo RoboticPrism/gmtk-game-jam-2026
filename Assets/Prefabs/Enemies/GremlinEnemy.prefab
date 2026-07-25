@@ -54,7 +54,7 @@ MonoBehaviour:
   spriteRenderer: {fileID: 8446443596323264513}
   defeatEffectPrefab: {fileID: 2651895036112060311, guid: edf2a4d2b0d4ad3499bae23a0477a3ac, type: 3}
   defeatClip: {fileID: 8300000, guid: af501d574e3cd1e43875de550433feaf, type: 3}
-  moveSpeed: 0.2
+  moveSpeed: 10
   maxHealth: 3
   currentHealth: 0
   bumpCooldownSeconds: 1
