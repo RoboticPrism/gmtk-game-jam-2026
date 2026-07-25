@@ -24,6 +24,9 @@ public class TowerDefenseManager : MonoBehaviour
     private List<SpawnPoint> recentlyUsedSpawnPoints = new List<SpawnPoint>();
 
     [SerializeField]
+    private GameObject winText;
+
+    [SerializeField]
     private GameObject gameoverText;
 
     private int playerLightRadius;
@@ -33,6 +36,7 @@ public class TowerDefenseManager : MonoBehaviour
     {
         public int gremlinCount;
         public int gremlinSpawnDelay;
+        public int nextDaySteps;
     }
 
     [SerializeField]
@@ -92,23 +96,32 @@ public class TowerDefenseManager : MonoBehaviour
 
     public void EndTowerDefenseMode()
     {
-        isTowerDefenseMode = false;
+        // If there's another night, start the next day
+        if (waves.Count > 0)
+        {
+            isTowerDefenseMode = false;
 
-        GridManager.singleton.EndTowerDefense();
+            GridManager.singleton.EndTowerDefense();
 
-        // Go back to explore music
-        BackgroundMusicManager.singleton.StartExploreMusic();
+            // Go back to explore music
+            BackgroundMusicManager.singleton.StartExploreMusic();
 
-        // Reload all turrets
-        TurretManager.singleton.ReloadAllTurrets();
+            // Reload all turrets
+            TurretManager.singleton.ReloadAllTurrets();
 
-        // Restore pyre light radius
-        Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = previousPyreLightRadius;
+            // Restore pyre light radius
+            Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = previousPyreLightRadius;
 
-        // Reenable player's light radius 
-        Player.singleton.GetComponent<FogOfWarLight>().lightRadius = playerLightRadius;
-        FogOfWarManager.TriggerLightingUpdate();
-        CounterManager.singleton.steps = CounterManager.singleton.startingSteps;
+            // Reenable player's light radius 
+            Player.singleton.GetComponent<FogOfWarLight>().lightRadius = playerLightRadius;
+            FogOfWarManager.TriggerLightingUpdate();
+            CounterManager.singleton.steps = currentWave.nextDaySteps;
+        }
+        // otherwise win!
+        else
+        {
+            StartCoroutine(WinAnimation());
+        }
     }
 
     public void DoTurn()
@@ -177,6 +190,8 @@ public class TowerDefenseManager : MonoBehaviour
         // Turn off the forced lighting to play our own lightin animation
         GridManager.singleton.EndTowerDefense();
 
+        BackgroundMusicManager.singleton.LoseEffect();
+
         FogOfWarLight pyreLight = Pyre.singleton.GetComponent<FogOfWarLight>();
         while (pyreLight.lightRadius > 0)
         {
@@ -192,6 +207,32 @@ public class TowerDefenseManager : MonoBehaviour
         yield return new WaitForSeconds(5f);
 
         ScreenEffectManager.singleton.FadeOut();
+        yield return new WaitForSeconds(2f);
+
+        // warp to title screen
+        SceneManager.LoadScene("MainMenu");
+    }
+
+    IEnumerator WinAnimation()
+    {
+        // Turn off the forced lighting to play our own lightin animation
+        GridManager.singleton.EndTowerDefense();
+
+        BackgroundMusicManager.singleton.WinEffect();
+
+        winText.SetActive(true);
+
+        FogOfWarLight pyreLight = Pyre.singleton.GetComponent<FogOfWarLight>();
+        while (pyreLight.lightRadius < 15)
+        {
+            yield return new WaitForSeconds(1f);
+            pyreLight.lightRadius++;
+            FogOfWarManager.TriggerLightingUpdate();
+        }
+
+        yield return new WaitForSeconds(1f);
+
+        ScreenEffectManager.singleton.FadeToWhite();
         yield return new WaitForSeconds(2f);
 
         // warp to title screen

@@ -12,7 +12,19 @@ public class BackgroundMusicManager : MonoBehaviour
     private AudioSource defendMusic;
 
     [SerializeField]
+    private AudioSource generalSource;
+
+    [SerializeField]
+    private AudioClip winClip;
+
+    [SerializeField]
+    private AudioClip loseClip;
+
+    [SerializeField]
     private float fadeSpeed;
+
+    [SerializeField]
+    private float clipFadeSpeed;
 
     public void Awake()
     {
@@ -33,6 +45,16 @@ public class BackgroundMusicManager : MonoBehaviour
     public void StartExploreMusic()
     {
         StartCoroutine(ExploreMusicTransition());
+    }
+
+    public void WinEffect()
+    {
+        StartCoroutine(WinMusicTransition());
+    }
+
+    public void LoseEffect()
+    {
+        StartCoroutine(LoseMusicTransition());
     }
 
     IEnumerator DefendMusicTransition()
@@ -60,6 +82,26 @@ public class BackgroundMusicManager : MonoBehaviour
             exploreMusic.volume += Time.deltaTime * fadeSpeed;
             yield return null;
         }
+    }
+
+    IEnumerator WinMusicTransition()
+    {
+        while(defendMusic.volume > 0)
+        {
+            defendMusic.volume -= Time.deltaTime * clipFadeSpeed;
+            yield return null;
+        }
+        generalSource.PlayOneShot(winClip);
+    }
+
+    IEnumerator LoseMusicTransition()
+    {
+        while(defendMusic.volume > 0)
+        {
+            defendMusic.volume -= Time.deltaTime * clipFadeSpeed;
+            yield return null;
+        }
+        generalSource.PlayOneShot(loseClip);
     }
 
     // Update is called once per frame

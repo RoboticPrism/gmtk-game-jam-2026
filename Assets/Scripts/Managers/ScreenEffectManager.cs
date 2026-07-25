@@ -34,6 +34,11 @@ public class ScreenEffectManager : MonoBehaviour
         StartCoroutine(FadeInAnimation());
     }
 
+    public void FadeToWhite()
+    {
+        StartCoroutine(FadeToWhiteAnimation());
+    }
+
     IEnumerator FadeOutAnimation()
     {
         Color color = fade.color;
@@ -55,6 +60,19 @@ public class ScreenEffectManager : MonoBehaviour
         {
             currentTime += Time.deltaTime;
             float alpha = Mathf.Lerp(1f, 0f, currentTime / fadeSeconds);
+            fade.color = new Color(color.r, color.g, color.b, alpha);
+            yield return null;
+        }
+    }
+
+    IEnumerator FadeToWhiteAnimation()
+    {
+        Color color = Color.white;
+        float currentTime = 0f;
+        while (currentTime < fadeSeconds)
+        {
+            currentTime += Time.deltaTime;
+            float alpha = Mathf.Lerp(0f, 1f, currentTime / fadeSeconds);
             fade.color = new Color(color.r, color.g, color.b, alpha);
             yield return null;
         }

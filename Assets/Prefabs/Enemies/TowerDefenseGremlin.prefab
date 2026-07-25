@@ -46,7 +46,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5ab5fdc42c6c4944e8261cc4bad52a01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefenseGremlin
-  bumpClip: {fileID: 8300000, guid: 586cc7bf8194ca64ab12bb6ae2abdb3a, type: 3}
+  bumpClip: {fileID: 8300000, guid: 8b95135239dea6f40ada7b6c6fde9304, type: 3}
   gridLocation: {x: 0, y: 0, z: 0}
   visualTargetLocation: {x: 0, y: 0, z: 0}
   spriteRenderer: {fileID: 3864425574232680000}
