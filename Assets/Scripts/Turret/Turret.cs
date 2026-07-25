@@ -52,6 +52,9 @@ public class Turret : BumpableTile
     [SerializeField]
     private AudioClip outOfAmmoClip;
 
+    [SerializeField]
+    private AudioClip reloadClip;
+
     public void Awake()
     {
         TurretManager.singleton.AddTurret(this);
@@ -72,7 +75,10 @@ public class Turret : BumpableTile
 
     public void Update()
     {
-        upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode);
+        if (upgradeCostUIInstance)
+        {
+            upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode);
+        }
         outOfAmmoAlert.SetActive(TowerDefenseManager.singleton.isTowerDefenseMode && currentAmmo <= 0);
         SetSprite();
     }
@@ -143,13 +149,19 @@ public class Turret : BumpableTile
         }
     }
 
+    public void Reload()
+    {
+        currentAmmo = currentTurretLevel.maxAmmo;
+        audioSource.PlayOneShot(reloadClip);
+    }
+
     public override void OnBump()
     {
         base.OnBump();
         // in tower defense mode, a bump reloads
         if(TowerDefenseManager.singleton.isTowerDefenseMode)
         {
-            currentAmmo = currentTurretLevel.maxAmmo;
+            Reload();
         } 
         else
         {
@@ -169,7 +181,6 @@ public class Turret : BumpableTile
                     CreateUI();
                 }
             }
-            //upgrade logic
         }
     }
 
