@@ -47,7 +47,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::TurretProjectile
   speed: 0.1
-  shootClip: {fileID: 0}
+  shootClip: {fileID: 8300000, guid: 388d8c7232a22e14b941147a90199bd3, type: 3}
 --- !u!82 &-8538326812744812186
 AudioSource:
   m_ObjectHideFlags: 0
