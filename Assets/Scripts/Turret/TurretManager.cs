@@ -50,4 +50,12 @@ public class TurretManager : MonoBehaviour
             }
         }
     }
+
+    public void ReloadAllTurrets()
+    {
+        foreach(Turret turret in turretInstances)
+        {
+            turret.Reload();
+        }
+    }
 }

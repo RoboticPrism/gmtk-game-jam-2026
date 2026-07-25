@@ -96,7 +96,11 @@ public class TowerDefenseManager : MonoBehaviour
 
         GridManager.singleton.EndTowerDefense();
 
+        // Go back to explore music
         BackgroundMusicManager.singleton.StartExploreMusic();
+
+        // Reload all turrets
+        TurretManager.singleton.ReloadAllTurrets();
 
         // Restore pyre light radius
         Pyre.singleton.GetComponent<FogOfWarLight>().lightRadius = previousPyreLightRadius;
