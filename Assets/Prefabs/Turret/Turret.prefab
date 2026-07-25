@@ -61,6 +61,10 @@ MonoBehaviour:
       level: 2
       subcosts:
       - resourceType: 0
+        amount: 10
+      - resourceType: 1
+        amount: 10
+      - resourceType: 6
         amount: 1
     baseSprite: {fileID: 21300000, guid: 6fd1ef8c6e1e12b469f32ed9a28cc567, type: 3}
     outOfAmmoSprite: {fileID: 21300000, guid: 888d7fe65df70064f9253deb30c74865, type: 3}
@@ -71,7 +75,11 @@ MonoBehaviour:
       level: 3
       subcosts:
       - resourceType: 0
-        amount: 1
+        amount: 10
+      - resourceType: 1
+        amount: 10
+      - resourceType: 6
+        amount: 3
     baseSprite: {fileID: 21300000, guid: 0ba09a66e1e9812488843f11fdeb1f04, type: 3}
     outOfAmmoSprite: {fileID: 21300000, guid: 5484f6dbec3ef92469949b4cd86a7ed4, type: 3}
   - level: 3
