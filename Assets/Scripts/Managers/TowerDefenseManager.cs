@@ -53,6 +53,8 @@ public class TowerDefenseManager : MonoBehaviour
     [SerializeField]
     private int defenseModePyreLightRadius;
 
+    private bool isGameOver = false;
+
     public void Awake()
     {
         if (singleton)
@@ -96,6 +98,10 @@ public class TowerDefenseManager : MonoBehaviour
 
     public void EndTowerDefenseMode()
     {
+        if(isGameOver)
+        {
+            return;
+        }
         // If there's another night, start the next day
         if (waves.Count > 0)
         {
@@ -177,6 +183,7 @@ public class TowerDefenseManager : MonoBehaviour
         Pyre.singleton.health--;
         if(Pyre.singleton.health <= 0)
         {
+            isGameOver = true;
             if(gameoverCoroutine == null)
             {
                 gameoverCoroutine = StartCoroutine(GameoverAnimation());

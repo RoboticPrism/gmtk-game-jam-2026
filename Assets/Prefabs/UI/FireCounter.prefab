@@ -309,5 +309,6 @@ MonoBehaviour:
   backgroundImage: {fileID: 2203630140642667386}
   counterText: {fileID: 4803038848322256993}
   container: {fileID: 4499237940389522813}
+  highFireScale: 1.1
   lowWarningScale: 1.2
   lowWarningSpeed: 1
