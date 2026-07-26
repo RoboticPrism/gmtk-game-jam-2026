@@ -49,7 +49,7 @@ MonoBehaviour:
   startingSteps: 500
   isCounting: 0
   lowStepsThreshold: 50
-  lowStepsClip: {fileID: 8300000, guid: 0e19abe9ccf929d4085d5c89d62732a6, type: 3}
+  lowStepsClip: {fileID: 8300000, guid: a171aae1fd735e24ab00a70dda0904e0, type: 3}
   highestPitch: 0.5
   lowestPitch: 0.2
   tutorials:

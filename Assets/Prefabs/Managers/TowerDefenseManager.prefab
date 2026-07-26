@@ -196,17 +196,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TowerDefenseManager
   isTowerDefenseMode: 0
   gremlinPrefab: {fileID: 1219167585728698762, guid: bb43f14b2ecad4c4fac5c5d57106034f, type: 3}
+  instantiatedGremlins: []
+  allSpawnPoints: []
+  recentlyUsedSpawnPoints: []
+  winText: {fileID: 0}
   gameoverText: {fileID: 0}
   waves:
   - gremlinCount: 5
     gremlinSpawnDelay: 5
+    nextDaySteps: 400
   - gremlinCount: 10
+    gremlinSpawnDelay: 4
+    nextDaySteps: 400
+  - gremlinCount: 20
     gremlinSpawnDelay: 3
+    nextDaySteps: 300
+  - gremlinCount: 25
+    gremlinSpawnDelay: 2
+    nextDaySteps: 300
   - gremlinCount: 30
     gremlinSpawnDelay: 1
+    nextDaySteps: 0
   currentWave:
     gremlinCount: 0
     gremlinSpawnDelay: 0
+    nextDaySteps: 0
   currentSpawnDelay: 0
   defenseModePyreLightRadius: 10
 --- !u!1 &2015984197269053093

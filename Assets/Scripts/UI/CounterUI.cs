@@ -33,6 +33,9 @@ public class CounterUI : MonoBehaviour
     private GameObject container;
 
     [SerializeField]
+    private float highFireScale;
+
+    [SerializeField]
     private float lowWarningScale;
 
     [SerializeField]
@@ -51,10 +54,17 @@ public class CounterUI : MonoBehaviour
     {
         UpdateCount();
 
-        // If we're low on steps, and the steps just changed, bump out the size
-        if(CounterManager.singleton.steps != previousSteps && CounterManager.singleton.steps <= CounterManager.singleton.lowStepsThreshold)
+        // If the steps just changed, bump out the size
+        if(CounterManager.singleton.steps != previousSteps)
         {
-            container.transform.localScale = Vector3.one * lowWarningScale;
+            if (CounterManager.singleton.steps <= CounterManager.singleton.lowStepsThreshold)
+            {
+                container.transform.localScale = Vector3.one * lowWarningScale;
+            }
+            else
+            {
+                container.transform.localScale = Vector3.one * highFireScale;
+            }
         }
 
         // If we've bumped the size, move back to normal scale
