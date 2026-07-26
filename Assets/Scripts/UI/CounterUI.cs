@@ -32,6 +32,12 @@ public class CounterUI : MonoBehaviour
     [SerializeField]
     private GameObject container;
 
+    [SerializeField]
+    private float lowWarningScale;
+
+    [SerializeField]
+    private float lowWarningSpeed;
+
     private bool isTutorialized = false;
 
     public void Start()
@@ -39,10 +45,29 @@ public class CounterUI : MonoBehaviour
         container.SetActive(false);
     }
 
+    private int previousSteps = 500;
     // Update is called once per frame
     void Update()
     {
         UpdateCount();
+
+        // If we're low on steps, and the steps just changed, bump out the size
+        if(CounterManager.singleton.steps != previousSteps && CounterManager.singleton.steps <= CounterManager.singleton.lowStepsThreshold)
+        {
+            container.transform.localScale = Vector3.one * lowWarningScale;
+        }
+
+        // If we've bumped the size, move back to normal scale
+        if(container.transform.localScale.x > 1)
+        {
+            container.transform.localScale -= Vector3.one * lowWarningSpeed * Time.deltaTime;
+            if(container.transform.localScale.z < 1)
+            {
+                container.transform.localScale = Vector3.one;
+            }
+        }
+
+        previousSteps = CounterManager.singleton.steps;
     }
 
     private void UpdateCount()

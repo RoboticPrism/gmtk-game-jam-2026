@@ -32,10 +32,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5031710005241371629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2203630140642667386
 MonoBehaviour:
@@ -57,7 +57,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: babc97a49242d92429b1addaf3c038bf, type: 3}
+  m_Sprite: {fileID: 21300000, guid: a3750ca17e7635a488266c202b5a5721, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -107,10 +107,10 @@ RectTransform:
   m_Children: []
   m_Father: {fileID: 5031710005241371629}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 200, y: 50}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4803038848322256993
 MonoBehaviour:
@@ -136,8 +136,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 13f4ae37fa7a5ba4a8882d9eacc9a458, type: 2}
+  m_sharedMaterial: {fileID: -5959377623242342073, guid: 13f4ae37fa7a5ba4a8882d9eacc9a458, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -161,13 +161,13 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 36
-  m_fontSizeBase: 36
+  m_fontSize: 72
+  m_fontSizeBase: 72
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
   m_fontSizeMax: 72
-  m_fontStyle: 0
+  m_fontStyle: 1
   m_HorizontalAlignment: 2
   m_VerticalAlignment: 512
   m_textAlignment: 65535
@@ -246,10 +246,10 @@ RectTransform:
   - {fileID: 5079169420846438365}
   m_Father: {fileID: 1441612670362715512}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0.5, y: 0.5}
-  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
   m_AnchoredPosition: {x: 0, y: 0}
-  m_SizeDelta: {x: 100, y: 100}
+  m_SizeDelta: {x: 0, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7270040109406673696
 GameObject:
@@ -300,12 +300,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ab6121c150997894797abbc02720f28e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CounterUI
-  highFireCount: {fileID: 21300000, guid: babc97a49242d92429b1addaf3c038bf, type: 3}
+  highFireCount: {fileID: 21300000, guid: a3750ca17e7635a488266c202b5a5721, type: 3}
   highFireThreshold: 100
-  mediumFireCount: {fileID: 21300000, guid: c52974f9eac45f145982dfd15c454143, type: 3}
+  mediumFireCount: {fileID: 21300000, guid: 0eaf837225ca85d48a87388491fdaeac, type: 3}
   mediumFireThreshold: 50
-  lowFireCount: {fileID: 21300000, guid: 592885ac888b84e4692cc7186f54543e, type: 3}
+  lowFireCount: {fileID: 21300000, guid: c943b00183ef3d94cb6112ee37c687f0, type: 3}
   lowFireThreshold: 25
   backgroundImage: {fileID: 2203630140642667386}
   counterText: {fileID: 4803038848322256993}
-  container: {fileID: 0}
+  container: {fileID: 4499237940389522813}
+  lowWarningScale: 1.2
+  lowWarningSpeed: 1
