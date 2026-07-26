@@ -1,5 +1,36 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &1305993995191148595
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1136839910523661007}
+  m_Layer: 0
+  m_Name: PanTarget
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1136839910523661007
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305993995191148595}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: -12}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6212116907353838432}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2871158730719365062
 GameObject:
   m_ObjectHideFlags: 0
@@ -34,7 +65,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -5.26}
+  m_AnchoredPosition: {x: 0, y: -7.1}
   m_SizeDelta: {x: 20, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5078383540019675602
@@ -199,7 +230,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2842755086927174424
 RectTransform:
   m_ObjectHideFlags: 0
@@ -216,7 +247,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: 1.26}
+  m_AnchoredPosition: {x: 0, y: 0.22}
   m_SizeDelta: {x: 20, y: 5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &5385767148577055648
@@ -412,7 +443,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.97}
+  m_AnchoredPosition: {x: 0, y: -5.42}
   m_SizeDelta: {x: 20, y: 2}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!23 &6692642194487296090
@@ -595,6 +626,7 @@ Transform:
   - {fileID: 4523563541529497213}
   - {fileID: 8255421412744936725}
   - {fileID: 5487147231570460742}
+  - {fileID: 1136839910523661007}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &7649564817014927504
@@ -642,12 +674,16 @@ MonoBehaviour:
   lowHealthThreshold: 0
   noHealthFire: {fileID: 21300000, guid: a88d4d96c77d5114a8a58847a4e1887b, type: 3}
   title: {fileID: 8745149704532665658}
-  titleHoldSeconds: 5
+  titleHoldSeconds: 3
+  cameraPanSpeed: 5
+  panTarget: {fileID: 1136839910523661007}
   fadeInSeconds: 1
-  holdSeconds: 20
+  holdSeconds: 3
   fadeOutSeconds: 5
   subtext1: {fileID: 7100661743464777580}
   subtext2: {fileID: 1753275415124919326}
+  introClip: {fileID: 8300000, guid: d437cf49e438ad44382f38a8bcef2452, type: 3}
+  hasFinishedAnimation: 0
 --- !u!82 &5826190248910872353
 AudioSource:
   m_ObjectHideFlags: 0

@@ -44,4 +44,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dfd142c74f9ddd746918e14f07ee777d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::CounterManager
-  steps: 200
+  steps: 500
+  startingSteps: 500
+  isCounting: 0
+  tutorials:
+  - tutorial: {fileID: 0}
+    displayAtStepCount: 450
+  - tutorial: {fileID: 0}
+    displayAtStepCount: 250
+  - tutorial: {fileID: 0}
+    displayAtStepCount: 100
+  - tutorial: {fileID: 0}
+    displayAtStepCount: 0

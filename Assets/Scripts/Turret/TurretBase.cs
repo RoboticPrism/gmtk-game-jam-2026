@@ -30,7 +30,10 @@ public class TurretBase : BumpableTile
     // Update is called once per frame
     void Update()
     {
-        upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode); 
+        if (upgradeCostUIInstance)
+        {
+            upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode && Pyre.singleton.hasFinishedAnimation);
+        }
     }
 
     public override void OnBump()

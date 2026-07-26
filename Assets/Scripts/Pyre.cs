@@ -70,6 +70,12 @@ public class Pyre : BumpableTile
     private float titleHoldSeconds;
 
     [SerializeField]
+    private float cameraPanSpeed;
+
+    [SerializeField]
+    private Transform panTarget;
+
+    [SerializeField]
     private float fadeInSeconds;
 
     [SerializeField]
@@ -84,8 +90,11 @@ public class Pyre : BumpableTile
     [SerializeField]
     private TextMeshPro subtext2;
 
+    [SerializeField]
+    private AudioClip introClip;
+
     private bool hasAnimated = false;
-    private bool hasFinishedAnimation = false;
+    public bool hasFinishedAnimation = false;
 
     public void Awake()
     {
@@ -176,8 +185,25 @@ public class Pyre : BumpableTile
 
     IEnumerator PyreTextAnimation()
     {
+        // Stop the player from moving
+        Player.singleton.playerMovement.controls.Disable();
+
+        // Store original position
+        Vector3 cameraLocalPosition = Camera.main.transform.localPosition;
+
+        // Move camera to the pyre
+        Camera.main.transform.SetParent(null);
+        while (Vector3.Distance(Camera.main.transform.position, panTarget.position) > 0.1f)
+        {
+            Camera.main.transform.position = Vector3.MoveTowards(Camera.main.transform.position, panTarget.position, cameraPanSpeed * Time.deltaTime);
+            yield return null;
+        }
+
         // Pop title
         title.gameObject.SetActive(true);
+
+        // Play the sting
+        audioSource.PlayOneShot(introClip);
 
         // Hold
         yield return new WaitForSeconds(titleHoldSeconds);
@@ -204,12 +230,11 @@ public class Pyre : BumpableTile
             yield return null;
         }
 
-        // Play the counter intro
-        FindAnyObjectByType<CounterUI>().PlayIntro(this);
-
         // Actually start counting steps
         CounterManager.singleton.StartCounting();
-        hasFinishedAnimation = true;
+
+        // Play the counter intro
+        FindAnyObjectByType<CounterUI>().PlayIntro(this);
 
         yield return new WaitForSeconds(1f);
 
@@ -218,6 +243,20 @@ public class Pyre : BumpableTile
 
         // Hold
         yield return new WaitForSeconds(holdSeconds);
+
+        // Move camera to the player
+        Camera.main.transform.SetParent(Player.singleton.transform);
+
+        while (Vector3.Distance(Camera.main.transform.localPosition, cameraLocalPosition) > 0.1f)
+        {
+            Camera.main.transform.localPosition = Vector3.MoveTowards(Camera.main.transform.localPosition, cameraLocalPosition, cameraPanSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        // Let the player free of the animation
+        Player.singleton.playerMovement.controls.Enable();
+
+        hasFinishedAnimation = true;
 
         // Fade out all
         color = subtext1.color;
