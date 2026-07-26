@@ -15,6 +15,20 @@ public class CounterManager : MonoBehaviour
 
     public bool isCounting = false;
 
+    [SerializeField]
+    public int lowStepsThreshold;
+
+    [SerializeField]
+    private AudioClip lowStepsClip;
+
+    [SerializeField]
+    private float highestPitch;
+
+    [SerializeField]
+    private float lowestPitch;
+
+    private AudioSource audioSource;
+
     [System.Serializable]
     class TutorialAtCount
     {
@@ -35,6 +49,7 @@ public class CounterManager : MonoBehaviour
         {
             singleton = this;
         }
+        audioSource = GetComponent<AudioSource>();
     }
 
     public void StartCounting()
@@ -48,6 +63,12 @@ public class CounterManager : MonoBehaviour
         if (!TowerDefenseManager.singleton.isTowerDefenseMode && isCounting)
         {
             steps--;
+
+            if(steps <= lowStepsThreshold)
+            {
+                audioSource.pitch = Mathf.Lerp(lowestPitch, highestPitch, Mathf.InverseLerp(0, lowStepsThreshold, steps));
+                audioSource.PlayOneShot(lowStepsClip);
+            }
 
             // Play any relevant tutorials
             TutorialAtCount currentTutorial = null;
