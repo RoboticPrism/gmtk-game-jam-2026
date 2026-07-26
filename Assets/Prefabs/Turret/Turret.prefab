@@ -69,7 +69,7 @@ MonoBehaviour:
     baseSprite: {fileID: 21300000, guid: 6fd1ef8c6e1e12b469f32ed9a28cc567, type: 3}
     outOfAmmoSprite: {fileID: 21300000, guid: 888d7fe65df70064f9253deb30c74865, type: 3}
   - level: 2
-    maxAmmo: 5
+    maxAmmo: 10
     cooldownBetweenShots: 7
     nextLevelCost:
       level: 3
@@ -83,7 +83,7 @@ MonoBehaviour:
     baseSprite: {fileID: 21300000, guid: 0ba09a66e1e9812488843f11fdeb1f04, type: 3}
     outOfAmmoSprite: {fileID: 21300000, guid: 5484f6dbec3ef92469949b4cd86a7ed4, type: 3}
   - level: 3
-    maxAmmo: 10
+    maxAmmo: 20
     cooldownBetweenShots: 3
     nextLevelCost:
       level: 4

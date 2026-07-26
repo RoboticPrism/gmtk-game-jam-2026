@@ -206,16 +206,16 @@ MonoBehaviour:
     gremlinSpawnDelay: 5
     nextDaySteps: 400
   - gremlinCount: 10
-    gremlinSpawnDelay: 4
+    gremlinSpawnDelay: 5
     nextDaySteps: 400
   - gremlinCount: 20
-    gremlinSpawnDelay: 3
+    gremlinSpawnDelay: 5
     nextDaySteps: 300
   - gremlinCount: 25
-    gremlinSpawnDelay: 2
+    gremlinSpawnDelay: 3
     nextDaySteps: 300
   - gremlinCount: 30
-    gremlinSpawnDelay: 1
+    gremlinSpawnDelay: 2
     nextDaySteps: 0
   currentWave:
     gremlinCount: 0

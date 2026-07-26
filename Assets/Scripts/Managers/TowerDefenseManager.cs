@@ -204,19 +204,14 @@ public class TowerDefenseManager : MonoBehaviour
         FogOfWarLight pyreLight = Pyre.singleton.GetComponent<FogOfWarLight>();
         while (pyreLight.lightRadius > 0)
         {
-            yield return new WaitForSeconds(1f);
+            yield return new WaitForSeconds(.25f);
             pyreLight.lightRadius--;
             FogOfWarManager.TriggerLightingUpdate();
         }
 
-        yield return new WaitForSeconds(1f);
-
         gameoverText.SetActive(true);
-
-        yield return new WaitForSeconds(5f);
-
         ScreenEffectManager.singleton.FadeOut();
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(5f);
 
         // warp to title screen
         SceneManager.LoadScene("MainMenu");
