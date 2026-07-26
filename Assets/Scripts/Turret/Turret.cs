@@ -184,6 +184,7 @@ public class Turret : BumpableTile
                 currentTurretLevel.nextLevelCost.payCost();
                 currentLevel++;
                 currentTurretLevel = GetCurrentLevel();
+                Reload(false);
 
                 audioSource.PlayOneShot(buildClip);
 
