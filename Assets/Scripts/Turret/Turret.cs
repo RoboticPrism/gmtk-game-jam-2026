@@ -86,7 +86,7 @@ public class Turret : BumpableTile
     {
         if (upgradeCostUIInstance)
         {
-            upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode);
+            upgradeCostUIInstance.gameObject.SetActive(!TowerDefenseManager.singleton.isTowerDefenseMode && Pyre.singleton.hasFinishedAnimation);
         }
         outOfAmmoAlert.SetActive(TowerDefenseManager.singleton.isTowerDefenseMode && currentAmmo <= 0);
         SetSprite();
